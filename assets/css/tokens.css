@@ -1,0 +1,98 @@
+/* =====================================================================
+   TOKENS DE DISEÑO (compartidos por las versiones A, B y C)
+   Inspirados en la estética de bitel.com.pe: azul profundo + amarillo,
+   Inter, botones píldora, etiqueta-burbuja y sombras suaves teñidas.
+   Para cambiar de marca basta con editar este archivo.
+   ===================================================================== */
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/inter-latin-wght-normal.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/inter-latin-wght-italic.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light;
+
+  /* Color de marca */
+  --c-primary: #03558b;        /* azul principal: header, botones, títulos */
+  --c-primary-700: #01375b;    /* hover de botones */
+  --c-primary-900: #023659;    /* fondo profundo de banners */
+  --c-primary-50: #e8f1f7;     /* tinte suave para fondos de íconos */
+  --c-accent: #fff200;         /* amarillo: CTA y cifras sobre azul */
+  --c-accent-hover: #ffe600;
+  --c-on-accent: #023659;      /* texto sobre amarillo (contraste 10:1) */
+
+  /* Neutros */
+  --c-ink: #1a1a1a;            /* texto principal */
+  --c-ink-2: #4a4f55;          /* texto secundario (7.9:1 sobre blanco) */
+  --c-muted: #5f666d;          /* notas legales, placeholders (5.9:1) */
+  --c-bg: #ffffff;
+  --c-surface: #f0f5f8;        /* secciones alternas */
+  --c-surface-2: #e6e7e8;
+  --c-line: #dfdfdf;           /* bordes de inputs y tablas */
+  --c-line-brand: #03558b66;   /* borde azul 40% */
+
+  /* Estados */
+  --c-danger: #b42318;         /* errores (6.4:1 sobre blanco) */
+  --c-success: #0f7a3d;
+  --c-whatsapp: #0f7a40;       /* verde oscurecido: 5.4:1 con texto blanco */
+  --c-whatsapp-hover: #0b6233;
+
+  /* Tipografía */
+  --font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --fs-xs: 0.75rem;   /* 12 */
+  --fs-sm: 0.875rem;  /* 14 */
+  --fs-md: 1rem;      /* 16 */
+  --fs-lg: 1.125rem;  /* 18 */
+  --fs-xl: 1.375rem;  /* 22 */
+  --fs-2xl: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);         /* títulos de sección */
+  --fs-3xl: clamp(2rem, 1.5rem + 2.4vw, 3.25rem);        /* titular hero */
+  --fs-4xl: clamp(2.5rem, 1.6rem + 4.4vw, 4.75rem);      /* banner promo */
+  --lh-tight: 1.1;
+  --lh-body: 1.55;
+
+  /* Espaciado (escala de 4px) */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+  --section-y: clamp(48px, 6vw, 88px);
+  --container: 1180px;
+  --gutter: 16px;
+
+  /* Forma: tarjetas 10px, banners 20px, inputs 8px, botones píldora */
+  --r-sm: 8px;
+  --r-md: 10px;
+  --r-lg: 20px;
+  --r-pill: 999px;
+  --r-bubble: 20px 20px 20px 0;  /* etiqueta-burbuja con esquina inferior izquierda recta */
+
+  /* Sombras teñidas de azul, nunca negras */
+  --sh-1: 0 1px 2px rgba(2, 54, 89, 0.06), 0 0 0 1px rgba(2, 54, 89, 0.04);
+  --sh-2: 0 8px 20px rgba(120, 160, 185, 0.28);
+  --sh-3: 0 18px 40px rgba(2, 54, 89, 0.16);
+  --sh-bubble: 0 6px 18px rgba(2, 54, 89, 0.15);
+  --focus: 0 0 0 3px rgba(3, 85, 139, 0.35);
+  --focus-on-dark: 0 0 0 3px rgba(255, 242, 0, 0.7);
+
+  /* Movimiento */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-fast: 160ms;
+
+  /* Capas */
+  --z-header: 20;
+  --z-sticky: 30;
+  --z-float: 40;
+  --z-cookies: 50;
+}
+
+@media (min-width: 768px) {
+  :root { --gutter: 24px; }
+}

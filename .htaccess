@@ -1,0 +1,32 @@
+# Landing de portabilidad Bitel - Apache (GoDaddy / cPanel)
+
+# Al entrar al dominio se abre la landing.
+DirectoryIndex portabilidad.html index.html
+
+# Forzar HTTPS (requiere certificado SSL activo en el dominio).
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# Compresión y caché para Core Web Vitals.
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript text/javascript image/svg+xml application/json
+</IfModule>
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 30 days"
+  ExpiresByType application/javascript "access plus 7 days"
+  ExpiresByType text/javascript "access plus 7 days"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 30 days"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+AddType font/woff2 .woff2
+AddType image/webp .webp
+
+# No listar carpetas.
+Options -Indexes

@@ -1,0 +1,9 @@
+# Archivos del sistema y del editor
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.vscode/
+.idea/
+# Paquetes de publicación (se generan aparte)
+*.zip

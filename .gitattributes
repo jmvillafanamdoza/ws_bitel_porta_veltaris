@@ -1,0 +1,5 @@
+# Finales de línea LF (el servidor de GoDaddy es Linux)
+* text=auto eol=lf
+*.png binary
+*.webp binary
+*.woff2 binary
