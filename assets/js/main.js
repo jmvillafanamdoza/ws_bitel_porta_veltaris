@@ -168,44 +168,57 @@
     });
   }
 
+  // Precio al estilo bitel.com.pe: "S/39" grande y ".90" pequeño.
+  function precioPartido(v) {
+    var partes = String(v).split('.');
+    return '<span class="cur">S/</span>' + esc(partes[0]) + (partes[1] ? '<span class="dec">.' + esc(partes[1]) + '</span>' : '');
+  }
+
+  // "50% de descuento x 12 meses" a partir de precio regular y promo.
+  function textoDescuento(p) {
+    var reg = parseFloat(p.precio), pro = parseFloat(p.promo.precio);
+    if (!(reg > 0) || !(pro > 0) || pro >= reg) return '';
+    return Math.round((1 - pro / reg) * 100) + '% de descuento x ' + p.promo.meses + ' meses';
+  }
+
+  // Tarjeta de plan con la línea de bitel.com.pe y el orden que convierte:
+  // gigas, precio tachado frente al precio a pagar, "Lo quiero" y WhatsApp juntos
+  // arriba (sin hacer scroll en la tarjeta), y después beneficios y apps.
   function tarjetaPlan(p) {
-    var destacado = /solicitado/i.test(p.etiqueta || '');
-    var tab = p.etiqueta
-      ? '<p class="pc-tab' + (destacado ? ' pc-tab--hot' : '') + '">' + esc(p.etiqueta) + '</p>'
-      : '<p class="pc-tab pc-tab--empty" aria-hidden="true"></p>';
+    var destacado = /solicitado|vendido/i.test(p.etiqueta || '');
+    var etiqueta = destacado ? (p.bono || '') : (p.etiqueta || p.bono || '');
+    var gb = esc(p.gb.replace(/[\[\]]/g, ''));
+    var ahorro = p.promo ? Math.round((1 - parseFloat(p.promo.precio) / parseFloat(p.precio)) * 100) : 0;
     var precio = p.promo
-      ? '<p class="pc-price"><span class="cur">S/</span>' + esc(p.promo.precio) + '</p>' +
-        '<p class="pc-per">al mes x ' + esc(p.promo.meses) + ' meses</p>' +
-        '<p class="pc-after">Precio regular <s>S/ ' + esc(p.precio) + '</s></p>'
-      : '<p class="pc-price"><span class="cur">S/</span>' + esc(p.precio) + '</p>' +
-        '<p class="pc-per">al mes</p>' +
-        '<p class="pc-after">Precio fijo mensual</p>';
-    var bono = textoBono(p);
-    var beneficios = (p.beneficios || beneficiosPorDefecto(p)).map(function (b) {
-      return '<li>' + icon(b.icono || 'check-circle') + '<div><p class="pc-bname">' + esc(b.nombre) + '</p><p class="pc-bdetail">' + esc(b.detalle || '') + '</p></div></li>';
-    }).join('');
+      ? '<p class="pc-before">Antes <s>S/ ' + esc(p.precio) + '</s>' + (ahorro > 0 ? ' <span class="pc-off">-' + ahorro + '%</span>' : '') + '</p>' +
+        '<p class="pc-price">' + precioPartido(p.promo.precio) + '</p>' +
+        '<p class="pc-per">al mes x ' + esc(p.promo.meses) + ' meses</p>'
+      : '<p class="pc-before pc-before--fixed">Precio fijo</p>' +
+        '<p class="pc-price">' + precioPartido(p.precio) + '</p>' +
+        '<p class="pc-per">al mes</p>';
+    var feats = [
+      '<li>' + icon('infinity') + '<span><b>Internet, llamadas y SMS</b> ilimitados</span></li>'
+    ];
+    (p.beneficios || beneficiosPorDefecto(p)).forEach(function (b) {
+      feats.push('<li>' + icon(b.icono || 'check-circle') + '<span><b>' + esc(b.nombre) + '</b>' + (b.detalle ? ' · ' + esc(b.detalle) : '') + '</span></li>');
+    });
     var apps = (p.apps || []).map(function (a) {
       return '<li class="app app--' + esc(a) + '" title="' + esc(NOMBRE_APP[a] || a) + '"><svg aria-hidden="true"><use href="' + ICONS + '#app-' + esc(a) + '"></use></svg><span class="sr-only">' + esc(NOMBRE_APP[a] || a) + '</span></li>';
     }).join('');
     var msg = 'Hola, quiero portarme a Bitel con el plan ' + p.nombre + '.';
-    return '<article class="pc' + (destacado ? ' is-featured' : '') + '">' + tab +
+    return '<article class="pc' + (destacado ? ' is-featured' : '') + '">' +
+      (destacado ? '<p class="pc-flag">' + esc(p.etiqueta) + '</p>' : '') +
       '<div class="pc-card">' +
         '<header class="pc-head">' +
           '<h3 class="pc-name">' + esc(p.nombre.replace(/ 5G$/, '')) + (p.cincoG ? ' <span class="tag-5g">5G</span>' : '') + '</h3>' +
-          '<p class="pc-gb">' + esc(p.gb) + '</p>' +
-          '<p class="pc-speed">en alta velocidad</p>' +
+          (etiqueta ? '<p class="pc-tag">' + esc(etiqueta) + '</p>' : '') +
         '</header>' +
-        '<div class="pc-body">' +
-          (bono ? '<p class="pc-bono">' + esc(bono) + '</p>' : '') +
-          '<p class="pc-unl">' + icon('cell-signal-full') + icon('phone') + '<span>Internet, llamadas y SMS <b>ilimitados</b></span></p>' +
-          '<div class="pc-block">' +
-            '<p class="pc-title">Apps ilimitadas</p><ul class="pc-apps">' + apps + '</ul>' +
-          '</div>' +
-          (beneficios ? '<div class="pc-block"><p class="pc-title">Beneficios incluidos</p><ul class="pc-benefits">' + beneficios + '</ul></div>' : '') +
-          '<div class="pc-pricebox">' + precio + '</div>' +
-          '<a class="btn ' + (destacado ? 'btn--accent' : 'btn--primary') + ' pc-cta" href="#formulario" data-elegir-plan="' + esc(p.clave) + '">Lo quiero</a>' +
-          '<a class="pc-wa" href="https://wa.me/" data-wa data-plan="' + esc(p.clave) + '" data-ubicacion="card" data-wa-msg="' + esc(msg) + '">' + icon('whatsapp-logo-fill') + 'Pedir por WhatsApp</a>' +
-        '</div>' +
+        '<p class="pc-gb">' + gb + '</p><p class="pc-speed">en alta velocidad</p>' +
+        '<div class="pc-pricebox">' + precio + '</div>' +
+        '<a class="btn btn--primary pc-cta" href="#formulario" data-elegir-plan="' + esc(p.clave) + '">Lo quiero</a>' +
+        '<a class="btn btn--wa-outline pc-wa" href="https://wa.me/" data-wa data-plan="' + esc(p.clave) + '" data-ubicacion="card" data-wa-msg="' + esc(msg) + '">' + icon('whatsapp-logo-fill') + 'Pedir por WhatsApp</a>' +
+        '<ul class="pc-feats">' + feats.join('') + '</ul>' +
+        (apps ? '<p class="pc-title">Apps ilimitadas</p><ul class="pc-apps">' + apps + '</ul>' : '') +
       '</div>' +
     '</article>';
   }
@@ -436,6 +449,33 @@
     });
   }
   if (planURL) marcarPlan(planURL);
+
+  // Banner del hero: plan de ?plan= (concordancia con el anuncio) o config.destacado.
+  var pOferta = planPorClave[planURL] || planPorClave[C.destacado];
+  $$('[data-offer]').forEach(function (box) {
+    if (!pOferta) return;
+    var p = pOferta;
+    var set = function (sel, txt) { var el = $(sel, box); if (el) el.textContent = txt; };
+    var tag = p.promo ? textoDescuento(p) : (p.etiqueta || (p.cincoG ? 'Red 5G' : ''));
+    var tagEl = $('[data-offer-tag]', box);
+    if (tagEl) { tagEl.textContent = tag; tagEl.hidden = !tag; }
+    set('[data-offer-nombre]', p.nombre);
+    set('[data-offer-gb]', p.gb.replace(/[\[\]]/g, ''));
+    set('[data-offer-precio]', precioPlan(p));
+    set('[data-offer-per]', p.promo ? 'al mes x ' + p.promo.meses + ' meses' : 'al mes');
+    var antes = $('[data-offer-before]', box);
+    if (antes) {
+      antes.hidden = !p.promo;
+      if (p.promo) { antes.textContent = 'Antes '; var s = doc.createElement('s'); s.textContent = 'S/ ' + p.precio; antes.appendChild(s); }
+    }
+    box.setAttribute('data-plan', p.clave);
+    $$('[data-offer-cta]', box).forEach(function (b) { b.setAttribute('data-elegir-plan', p.clave); });
+    $$('[data-offer-wa]', box).forEach(function (a) {
+      a.setAttribute('data-plan', p.clave);
+      a.setAttribute('data-wa-msg', 'Hola, quiero portarme a Bitel con el plan ' + p.nombre + '.');
+      prepararWA(a);
+    });
+  });
   $$('[data-plan-chip-clear]').forEach(function (b) { b.addEventListener('click', function () { marcarPlan(''); }); });
 
   /* ---------- Modal "Lo quiero" (modals__banners): foto + resumen del plan + formulario ---------- */
@@ -456,6 +496,12 @@
       $('[data-pm-precio]', modal).textContent = p.promo ? p.promo.precio : p.precio;
       $('[data-pm-per]', modal).textContent = p.promo ? 'al mes x ' + p.promo.meses + ' meses\nluego S/ ' + p.precio : 'al mes';
     }
+    // El WhatsApp del modal lleva el plan elegido en el mensaje.
+    $$('[data-wa]', modal).forEach(function (a) {
+      if (p) { a.setAttribute('data-wa-msg', 'Hola, quiero portarme a Bitel con el plan ' + p.nombre + '.'); a.setAttribute('data-plan', p.clave); }
+      else { a.removeAttribute('data-wa-msg'); a.removeAttribute('data-plan'); }
+      prepararWA(a);
+    });
     if (!modal.open) {
       ultimoFoco = doc.activeElement;
       modal.showModal();

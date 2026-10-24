@@ -7,3 +7,6 @@ desktop.ini
 .idea/
 # Paquetes de publicación (se generan aparte)
 *.zip
+
+# Configuración local de Claude (vista previa)
+.claude/

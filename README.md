@@ -7,7 +7,7 @@ La versión anterior (A/B/C) está en `..\_archivo_v1_ABC`.
 ## Estructura de la página (22/10/2026)
 
 Funcionalidad y flujo de venta de planesmovistar.pe/p/movistar-portabilidad con la marca Bitel (`tokens.css`).
-Lo nuevo de esta etapa vive en `assets/css/cambios.css` (se carga después de `landing.css`).
+Rediseño del 23/10/2026 (rama `rediseno-linea-bitel`): línea gráfica de bitel.com.pe (fondo blanco, header amarillo, botones azules, precios en magenta) y las tres vías de conversión visibles en la primera pantalla del móvil. Análisis en `..\analisis-benchmark.md`. La estructura de abajo es la de la versión anterior.
 
 1. **Header** amarillo: logo, menú con anclas (Planes, Requisitos, Contáctanos → modal) y botón "Solo contrataciones" con teléfono que timbra. Móvil: hamburguesa a la izquierda del logo con panel lateral azul (cierra con Esc, fondo o al elegir enlace) y "Llama gratis al [tel]" al final.
 2. **Barra promo** bajo el header: "Pásate a Bitel y llévate internet ilimitado / Tu plan desde S/ [desde] / Lo quiero" (abre el modal).
@@ -37,8 +37,7 @@ Eventos en `dataLayer`: elegir_plan, abrir_modal_plan, envio_formulario, click_l
 | `privacidad.html`, `terminos.html` | Legales (estructura, contenido [PLACEHOLDER]) |
 | `assets/js/config.js` | **Único archivo de configuración**: IDs de Google, endpoint, teléfono, WhatsApp, planes, titulares |
 | `assets/css/tokens.css` | Colores, tipografía, radios y sombras de Bitel |
-| `assets/css/landing.css` | Estilos de la página |
-| `assets/css/cambios.css` | Estilos de la etapa planesmovistar (menú, barra promo, carrusel del hero, grilla, modales legales, overlay, barras móviles) |
+| `assets/css/bitel.css` | Estilos de todas las páginas: línea gráfica de bitel.com.pe (rediseño del 23/10/2026) |
 | `assets/js/main.js` | Tracking, consentimiento, gclid/UTM, titular dinámico, planes, formulario |
 | `assets/img/` | Fotos (hero y sección Portabilidad Bitel) y logos de Bitel (bitel.com.pe) |
 | `.htaccess` | Gzip + caché para Apache |

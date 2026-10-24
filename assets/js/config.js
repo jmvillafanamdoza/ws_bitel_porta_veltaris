@@ -5,7 +5,7 @@
    ===================================================================== */
 window.LANDING_CONFIG = {
   marca: 'Bitel',
-  distribuidor: '[RAZÓN SOCIAL S.A.C.]',   // aparece como "Distribuidor autorizado de Bitel"
+  distribuidor: 'VELTARIS CONTACT CENTER E.I.R.L.',   // aparece como "Distribuidor autorizado de Bitel"
 
   /* ---------- Medición (Google Ads) ----------
      modo 'gtag': carga gtag.js con el ID de Google Ads (AW-XXXXXXXXXX).
@@ -45,8 +45,13 @@ window.LANDING_CONFIG = {
     horarioAtencion: '[Lunes a domingo de 8 a.m. a 10 p.m.]'   // texto bajo el botón de llamada
   },
 
-  /* ---------- Precio "desde" (barra promo y hero) ---------- */
+  /* ---------- Precio "desde" (barra promo de escritorio) ---------- */
   desde: '39.90',
+
+  /* ---------- Plan del banner principal (hero) ----------
+     Clave de "planes". Con ?plan=<clave> en la URL del anuncio se muestra ese plan.
+     Conviene uno con promo: el precio tachado frente al precio a pagar convierte mejor. */
+  destacado: 'ilimitado-79',
 
   /* ---------- Banners del hero (slides 2 y 3) ----------
      El slide 1 es el hero con el titular dinámico. Precio, GB y meses
@@ -75,7 +80,7 @@ window.LANDING_CONFIG = {
       '[PLACEHOLDER: pegar aquí los términos y restricciones oficiales de las promociones Bitel vigentes.]'
     ],
     consentimiento: [
-      'Al marcar esta casilla autorizas a [RAZÓN SOCIAL S.A.C.], distribuidor autorizado de Bitel, a usar tus datos de contacto para enviarte ofertas, promociones y novedades de productos y servicios Bitel por llamada, SMS, WhatsApp o correo.',
+      'Al marcar esta casilla autorizas a VELTARIS CONTACT CENTER E.I.R.L., distribuidor autorizado de Bitel, a usar tus datos de contacto para enviarte ofertas, promociones y novedades de productos y servicios Bitel por llamada, SMS, WhatsApp o correo.',
       'Esta autorización es opcional y no condiciona tu solicitud de portabilidad. Puedes revocarla en cualquier momento escribiendo a [correo de privacidad].',
       '[PLACEHOLDER: texto de consentimiento comercial del distribuidor, conforme a la Ley N.º 29733.]'
     ]
