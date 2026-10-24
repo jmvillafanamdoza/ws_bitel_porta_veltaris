@@ -16,14 +16,13 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="favicon.png" type="image/png">
   <link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/tokens.css?v=20261023c">
-  <link rel="stylesheet" href="assets/css/bitel.css?v=20261023c">
-  <script src="assets/js/config.js?v=20261023c" defer></script>
-  <script src="assets/js/main.js?v=20261023c" defer></script>
+  <link rel="stylesheet" href="assets/css/tokens.css?v=20261024a">
+  <link rel="stylesheet" href="assets/css/bitel.css?v=20261024a">
+  <script src="assets/js/config.js?v=20261024a" defer></script>
+  <script src="assets/js/main.js?v=20261024a" defer></script>
 </head>
 <body data-page="gracias">
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
-  <p class="topline"><span translate="no">Bitel</span> · Distribuidor autorizado: <span data-distribuidor>VELTARIS CONTACT CENTER E.I.R.L.</span>. No somos el portal oficial de Viettel Perú S.A.C.</p>
 
   <header class="site-header">
     <div class="wrap">
@@ -36,11 +35,9 @@
         <a class="nav-link" href="portabilidad.html#requisitos">Requisitos</a>
         <a class="nav-link" href="portabilidad.html#preguntas">Preguntas frecuentes</a>
       </nav>
-      <div class="call-info">
-        <span class="call-ic"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-headset"></use></svg></span>
-        <span class="call-txt"><span class="call-l1">Contrataciones <b data-tel-text>939 730 787</b></span><span class="call-l2" data-horario-text>[Lunes a domingo de 8 a.m. a 10 p.m.]</span></span>
-      </div>
-      <a class="call-pill" href="tel:+51939730787" data-tel data-ubicacion="header-movil"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-phone"></use></svg><span><small>Llámanos</small><b data-tel-text>939 730 787</b></span></a>
+      <!-- Número del header: solo de 9 a.m. a 6 p.m. (config.contacto.horarioLlamadas).
+           En celular se puede tocar para llamar; en PC es solo informativo. -->
+      <a class="call-head" href="tel:+51939730787" data-tel data-call-head data-ubicacion="header" hidden><span class="call-ic"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-phone"></use></svg></span><span class="call-txt"><small>Llámanos</small><b data-tel-text>939 730 787</b></span></a>
     </div>
   </header>
 
@@ -69,10 +66,8 @@
           <!-- PLACEHOLDER: datos reales del distribuidor (requeridos por Google Ads) -->
           <strong><span data-distribuidor>VELTARIS CONTACT CENTER E.I.R.L.</span>, distribuidor autorizado de Bitel</strong>
           <span>RUC 20615173992</span>
-          <span>[Dirección fiscal, distrito, Lima, Perú]</span>
           <span>Llamadas: <a href="tel:+51939730787" data-tel data-ubicacion="footer"><span data-tel-text>939 730 787</span></a></span>
           <span>WhatsApp: <a href="https://wa.me/51939730707?text=Hola%2C%20quiero%20portarme%20a%20Bitel%20con%20mi%20mismo%20n%C3%BAmero." data-wa data-ubicacion="footer"><span data-wa-text>939 730 707</span></a></span>
-          <span>Correo: [contacto@tudominio.pe]</span>
         </address>
       </div>
       <nav class="footer-links" aria-label="Enlaces legales">

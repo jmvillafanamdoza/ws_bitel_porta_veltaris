@@ -122,6 +122,29 @@
   $$('[data-distribuidor]').forEach(function (el) { el.textContent = C.distribuidor || ''; });
   $$('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
+  /* Número del header: visible solo en el horario de llamadas (hora de Lima).
+     En equipos que pueden llamar (táctiles) es un enlace tel:; en PC es solo texto. */
+  var puedeLlamar = matchMedia('(hover: none) and (pointer: coarse)').matches;
+  function horaLima() {
+    try {
+      var h = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Lima', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' }).formatToParts(new Date());
+      var get = function (t) { var x = h.filter(function (p) { return p.type === t; })[0]; return x ? +x.value : 0; };
+      return get('hour') + get('minute') / 60;
+    } catch (e) { var d = new Date(); return ((d.getUTCHours() + 19) % 24) + d.getUTCMinutes() / 60; } // UTC-5
+  }
+  function pintarLlamada() {
+    var H = K.horarioLlamadas || { desde: 9, hasta: 18 };
+    var hora = horaLima();
+    var abierto = hora >= H.desde && hora < H.hasta;
+    $$('[data-call-head]').forEach(function (el) {
+      el.hidden = !abierto;
+      if (puedeLlamar) { el.href = 'tel:' + (K.telefonoLink || ''); el.classList.remove('is-static'); }
+      else { el.removeAttribute('href'); el.classList.add('is-static'); }
+    });
+  }
+  pintarLlamada();
+  setInterval(pintarLlamada, 60000);
+
   // Clics de WhatsApp y llamada como conversión (delegado: cubre todos los enlaces).
   doc.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[href]');
@@ -486,7 +509,9 @@
   function abrirModal(clave, ubicacion) {
     if (!modal || typeof modal.showModal !== 'function') return false;
     if (!clave) { var oculto = $('input[name="plan"]', modal); clave = oculto ? oculto.value : ''; }
-    var p = planPorClave[clave];
+    // El resumen del plan solo se muestra al venir de la parrilla de planes;
+    // desde el banner u otros botones el modal sale limpio (el plan igual viaja oculto).
+    var p = ubicacion === 'card' ? planPorClave[clave] : null;
     var caja = $('[data-pm-plan]', modal);
     if (caja) caja.hidden = !p;
     if (p && caja) {

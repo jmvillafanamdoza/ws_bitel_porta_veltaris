@@ -42,7 +42,9 @@ window.LANDING_CONFIG = {
     whatsapp: '51939730707',              // WHATSAPP: solo dígitos, con 51, sin "+"
     whatsappTexto: '939 730 707',         // WHATSAPP: texto visible
     whatsappMensaje: 'Hola, quiero portarme a Bitel con mi mismo número.',
-    horarioAtencion: '[Lunes a domingo de 8 a.m. a 10 p.m.]'   // texto bajo el botón de llamada
+    horarioAtencion: '[Lunes a domingo de 8 a.m. a 10 p.m.]',  // texto de la página de gracias
+    // El número del header solo se muestra en este horario (hora de Lima, 24 h).
+    horarioLlamadas: { desde: 9, hasta: 18 }
   },
 
   /* ---------- Precio "desde" (barra promo de escritorio) ---------- */
