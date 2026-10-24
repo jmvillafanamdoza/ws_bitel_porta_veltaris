@@ -239,7 +239,7 @@
         '<p class="pc-gb">' + gb + '</p><p class="pc-speed">en alta velocidad</p>' +
         '<div class="pc-pricebox">' + precio + '</div>' +
         '<a class="btn btn--primary pc-cta" href="#formulario" data-elegir-plan="' + esc(p.clave) + '">Lo quiero</a>' +
-        '<a class="btn btn--wa-outline pc-wa" href="https://wa.me/" data-wa data-plan="' + esc(p.clave) + '" data-ubicacion="card" data-wa-msg="' + esc(msg) + '">' + icon('whatsapp-logo-fill') + 'Pedir por WhatsApp</a>' +
+        '<a class="btn btn--wa pc-wa" href="https://wa.me/" data-wa data-plan="' + esc(p.clave) + '" data-ubicacion="card" data-wa-msg="' + esc(msg) + '">' + icon('whatsapp-logo-fill') + 'Pedir por WhatsApp</a>' +
         '<ul class="pc-feats">' + feats.join('') + '</ul>' +
         (apps ? '<p class="pc-title">Apps ilimitadas</p><ul class="pc-apps">' + apps + '</ul>' : '') +
       '</div>' +

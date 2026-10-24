@@ -47,6 +47,9 @@ button, input, select { font: inherit; color: inherit; }
 .btn--outline:hover { background: var(--c-primary-50); }
 .btn--wa-outline { background: var(--c-bg); color: var(--c-whatsapp); border-color: var(--c-whatsapp); }
 .btn--wa-outline:hover { background: #e9f7ee; }
+/* WhatsApp: un solo verde en hero, tarjetas y flotante */
+.btn--wa { background: var(--c-whatsapp); color: var(--c-bg); }
+.btn--wa:hover { background: var(--c-whatsapp-hover); }
 .btn--lg { min-height: 52px; padding: 12px 28px; font-size: var(--fs-lg); }
 .btn--sm { min-height: 38px; padding: 6px 18px; font-size: var(--fs-sm); }
 .btn--block { width: 100%; }
@@ -369,13 +372,13 @@ a.call-head:not(.is-static):active { transform: scale(0.98); }
   font-size: var(--fs-sm); font-weight: 700; cursor: pointer; box-shadow: 0 -8px 20px rgba(2, 54, 89, 0.15);
 }
 .m-sheet-tab .icon { width: 22px; height: 22px; }
-/* Botón flotante con el verde oficial de WhatsApp (#25D366) */
+/* Botón flotante con el mismo verde de WhatsApp que el hero y las tarjetas */
 .wa-float {
   display: grid; place-items: center; width: 58px; height: 58px; border-radius: 50%;
-  background: #25d366; color: #fff; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22); text-decoration: none;
+  background: var(--c-whatsapp); color: var(--c-bg); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22); text-decoration: none;
   transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
 }
-.wa-float:hover { transform: scale(1.06); box-shadow: 0 10px 24px rgba(0, 0, 0, 0.26); }
+.wa-float:hover { background: var(--c-whatsapp-hover); transform: scale(1.06); box-shadow: 0 10px 24px rgba(0, 0, 0, 0.26); }
 .wa-float .icon { width: 34px; height: 34px; }
 /* Montado sobre el borde del panel: sigue al panel y no tapa los botones del hero */
 .wa-float--sheet { position: absolute; right: var(--gutter); top: -26px; z-index: 1; border: 3px solid var(--c-bg); }
@@ -385,7 +388,7 @@ a.call-head:not(.is-static):active { transform: scale(0.98); }
   .m-sheet { display: none; }
   .wa-float--desk {
     display: flex; gap: 10px; width: auto; height: 58px; padding: 0 22px 0 14px; border-radius: var(--r-pill);
-    position: fixed; right: 24px; bottom: 24px; z-index: var(--z-float); font-weight: 700; font-size: var(--fs-md); text-shadow: 0 1px 1px rgba(0, 0, 0, 0.18); transition: bottom 220ms var(--ease);
+    position: fixed; right: 24px; bottom: 24px; z-index: var(--z-float); font-weight: 700; font-size: var(--fs-md); transition: bottom 220ms var(--ease);
   }
   .dbar-on .wa-float--desk { bottom: 100px; }
 }
@@ -498,8 +501,6 @@ a.call-head:not(.is-static):active { transform: scale(0.98); }
 .page-simple { background: var(--c-surface); min-height: 60vh; }
 .wa-float--page { position: fixed; right: 16px; bottom: 16px; z-index: var(--z-float); }
 @media (min-width: 900px) { .wa-float--page { right: 24px; bottom: 24px; } }
-.btn--wa { background: var(--c-whatsapp); color: var(--c-bg); }
-.btn--wa:hover { background: var(--c-whatsapp-hover); }
 .thanks { max-width: 640px; padding: var(--sp-6) var(--gutter); border-radius: var(--r-lg); background: var(--c-bg); border: 1px solid var(--c-primary-15); text-align: center; }
 .thanks-icon { display: inline-grid; place-items: center; width: 64px; height: 64px; border-radius: var(--r-bubble); background: var(--c-accent); color: var(--c-primary); }
 .thanks-icon .icon { width: 36px; height: 36px; }
