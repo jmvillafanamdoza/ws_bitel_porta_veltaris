@@ -67,9 +67,17 @@ button, input, select { font: inherit; color: inherit; }
 .brand img { width: 86px; height: auto; }
 .brand-sub { padding-left: 10px; border-left: 1px solid rgba(2, 54, 89, 0.3); color: var(--c-primary-900); font-size: 0.6875rem; font-weight: 600; line-height: 1.2; }
 .main-nav { display: none; }
-.nav-link { position: relative; padding: 6px 0; color: var(--c-primary-900); font-size: var(--fs-sm); font-weight: 700; text-decoration: none; }
-.nav-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; border-radius: 2px; background: var(--c-primary-900); transform: scaleX(0); transform-origin: left; transition: transform var(--t-fast) var(--ease); }
-.nav-link:hover::after, .nav-link:focus-visible::after { transform: scaleX(1); }
+/* Menú como el de bitel.com.pe: pegado al logo, texto azul oscuro, sin subrayado */
+.nav-link { padding: 6px 0; color: var(--c-primary-900); font-size: var(--fs-sm); font-weight: 600; text-decoration: none; transition: color var(--t-fast) var(--ease); }
+.nav-link:hover, .nav-link:focus-visible { color: var(--c-primary); }
+/* Botón azul a la derecha (el lugar de "Mi Bitel" en bitel.com.pe) fuera del horario de llamadas */
+.head-cta {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 0 20px; border: 0; border-radius: var(--r-pill);
+  background: var(--c-primary); color: var(--c-bg); font-size: var(--fs-sm); font-weight: 700; text-decoration: none; cursor: pointer;
+}
+.head-cta[hidden] { display: none; }
+.head-cta .icon { color: var(--c-accent); }
+.head-cta:hover { background: var(--c-primary-700); }
 
 /* Número del header (solo de 9 a 18 h, lo controla main.js).
    Táctil: píldora que llama. PC: el mismo aspecto, sin enlace ni cursor de clic. */
@@ -94,7 +102,8 @@ a.call-head:not(.is-static):active { transform: scale(0.98); }
   .call-head b { font-size: var(--fs-lg); }
 }
 @media (min-width: 1100px) {
-  .main-nav { display: flex; gap: var(--sp-6); margin-right: var(--sp-5); }
+  .brand { margin-right: 0; }
+  .main-nav { display: flex; gap: 28px; margin-left: 36px; margin-right: auto; }
 }
 
 /* ---------- Franja promo (solo escritorio, como planesmovistar) ---------- */
@@ -136,6 +145,11 @@ a.call-head:not(.is-static):active { transform: scale(0.98); }
 .offer-now { display: flex; align-items: baseline; gap: 4px; margin-top: 6px; font-size: 3.5rem; font-weight: 800; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
 .offer-now .cur { font-size: 1.375rem; }
 .offer-per { margin-top: 4px; font-size: var(--fs-sm); font-weight: 600; color: var(--c-accent); }
+/* Ahorro total en soles: el dato concreto que más empuja la decisión */
+.offer-save { display: inline-block; margin-top: 10px; padding: 4px 10px; white-space: nowrap; letter-spacing: -0.01em; border: 1px solid var(--c-accent); border-radius: var(--r-pill); color: var(--c-accent); font-size: var(--fs-xs); font-weight: 800; }
+.offer-save[hidden] { display: none; }
+.offer-save .save-long { display: none; }
+@media (min-width: 600px) { .offer-save .save-long { display: inline; } }
 .offer-photo { width: 112px; aspect-ratio: 381 / 542; object-fit: cover; border-radius: var(--r-bubble); border: 3px solid var(--c-accent); }
 .offer-perks { display: none; }
 .offer-ctas { display: grid; grid-template-columns: 1.2fr 1fr; gap: 10px; }
@@ -149,7 +163,7 @@ a.call-head:not(.is-static):active { transform: scale(0.98); }
 /* Formulario del hero: solo escritorio (en móvil está el panel inferior) */
 .hero-form { display: none; }
 @media (min-width: 900px) {
-  .hero-grid { grid-template-columns: minmax(0, 1fr) 360px; align-items: stretch; gap: 0; padding-block: var(--sp-5) var(--sp-6); }
+  .hero-grid { grid-template-columns: minmax(0, 1fr) 380px; align-items: stretch; gap: 0; padding-block: var(--sp-5) var(--sp-6); }
   .offer { padding: 36px 40px; border-radius: var(--r-lg) 0 0 var(--r-lg); grid-template-columns: minmax(0, 1fr) 230px; column-gap: var(--sp-5); align-content: center; }
   .offer::after { right: -40px; bottom: -110px; width: 380px; height: 380px; border-width: 26px; }
   .offer > * { grid-column: 1; }
@@ -168,6 +182,12 @@ a.call-head:not(.is-static):active { transform: scale(0.98); }
     border: 1px solid var(--c-primary-15); border-left: 0; border-radius: 0 var(--r-lg) var(--r-lg) 0;
     background: var(--c-bg); box-shadow: var(--sh-2);
   }
+  .hero-form-head { display: flex; gap: 12px; align-items: flex-start; }
+  .hf-ic { display: grid; place-items: center; flex-shrink: 0; width: 44px; height: 44px; border-radius: var(--r-bubble); background: var(--c-accent); color: var(--c-primary-900); }
+  .hf-ic .icon { width: 24px; height: 24px; }
+  .hf-trust { display: grid; gap: 6px; margin-top: var(--sp-4); padding-top: var(--sp-3); border-top: 1px solid var(--c-primary-15); }
+  .hf-trust li { display: flex; align-items: center; gap: 8px; font-size: var(--fs-xs); font-weight: 600; color: var(--c-ink-2); }
+  .hf-trust .icon { width: 18px; height: 18px; color: var(--c-primary); }
   .hero-form-head .hf-kicker { display: inline-block; margin: 0; padding: 3px 12px; border-radius: var(--r-bubble); background: var(--c-primary); color: var(--c-bg); font-size: var(--fs-xs); font-weight: 700; }
   .hero-form-head h2 { margin-top: 10px; font-size: var(--fs-xl); font-weight: 800; }
   .hero-form-head p { margin-top: 6px; color: var(--c-ink-2); font-size: var(--fs-sm); }
@@ -189,6 +209,10 @@ a.call-head:not(.is-static):active { transform: scale(0.98); }
   background: #f3f8fc; font-size: var(--fs-md); font-weight: 600; color: var(--c-ink-strong);
   transition: border-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
 }
+/* Ícono dentro del campo (celular / DNI) para que se entienda de un vistazo */
+.input-wrap { position: relative; display: block; }
+.input-wrap > .icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; color: var(--c-primary); pointer-events: none; }
+.input-wrap input { padding-left: 38px !important; }
 .field input::placeholder { color: #55606b; font-weight: 500; }
 .field input:focus { background: var(--c-bg); }
 .field input:focus { border-color: var(--c-primary); box-shadow: var(--focus); outline: none; }
@@ -248,26 +272,41 @@ a.call-head:not(.is-static):active { transform: scale(0.98); }
 .pc-name { font-size: var(--fs-sm); font-weight: 700; color: var(--c-ink); letter-spacing: 0; }
 .tag-5g { display: inline-block; margin-left: 4px; padding: 0 6px; border-radius: var(--r-xs); background: var(--c-primary); color: var(--c-bg); font-size: 0.6875rem; vertical-align: 1px; }
 .pc-tag { flex-shrink: 0; max-width: 60%; padding: 3px 8px; border-radius: var(--r-xs); background: var(--c-accent); color: var(--c-primary-900); font-size: var(--fs-xs); font-weight: 700; text-align: center; line-height: 1.25; }
-.pc-gb { margin-top: 10px; text-align: center; font-size: 1.75rem; font-weight: 800; color: var(--c-primary); line-height: 1.1; }
-.pc-speed { text-align: center; font-size: var(--fs-xs); color: var(--c-muted); }
-.pc-pricebox { margin-top: 10px; padding: 10px 8px; border-radius: var(--r-sm); background: var(--c-surface); text-align: center; }
-.pc-before { display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 22px; font-size: var(--fs-sm); color: var(--c-ink-2); }
+/* Gigas protagonistas, como en los anuncios de Bitel ("220 GB" / "Ilimitados") */
+.pc-gb { display: flex; align-items: baseline; justify-content: center; gap: 4px; margin-top: 8px; color: var(--c-primary); line-height: 1; letter-spacing: -0.03em; }
+.pc-gb .n { font-size: 3.25rem; font-weight: 900; }
+.pc-gb .u { font-size: 1.5rem; font-weight: 800; }
+.pc-gb .w { font-size: 2.25rem; font-weight: 900; padding-block: 6px; }
+.pc-speed { margin-top: 6px; text-align: center; font-size: var(--fs-xs); font-weight: 600; color: var(--c-ink-2); }
+.pc-extra { margin-top: 2px; min-height: 1.4em; text-align: center; font-size: var(--fs-xs); font-weight: 700; color: var(--c-primary); }
+/* Caja azul: descuento en píldora amarilla, precio regular tachado y precio a pagar */
+.pc-pricebox { margin-top: 12px; padding: 12px 10px; border-radius: 12px; background: var(--c-primary); color: var(--c-bg); text-align: center; }
+.pc-off { display: inline-block; padding: 4px 12px; border-radius: var(--r-bubble); background: var(--c-accent); color: var(--c-primary-900); font-size: var(--fs-xs); font-weight: 800; }
+.pc-off--plain { background: rgba(255, 255, 255, 0.16); color: var(--c-bg); }
+.pc-before { margin-top: 8px; font-size: var(--fs-xs); color: rgba(255, 255, 255, 0.85); }
 .pc-before s { text-decoration-thickness: 1.5px; }
-.pc-before--fixed { color: var(--c-muted); font-size: var(--fs-xs); font-weight: 600; }
-.pc-off { padding: 1px 6px; border-radius: var(--r-xs); background: var(--c-price); color: var(--c-bg); font-size: var(--fs-xs); font-weight: 800; }
-.pc-price { display: flex; align-items: baseline; justify-content: center; color: var(--c-price); font-size: 3rem; font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
-.pc-price .cur { font-size: 1.5rem; margin-right: 2px; }
-.pc-price .dec { font-size: 1.375rem; }
-.pc-per { font-size: var(--fs-xs); font-weight: 600; color: var(--c-ink); }
+.pc-price { display: flex; align-items: baseline; justify-content: center; margin-top: 2px; color: var(--c-bg); font-size: 3rem; font-weight: 900; line-height: 1.05; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.pc-price .cur { font-size: 1.375rem; margin-right: 2px; }
+.pc-price .dec { font-size: 1.5rem; }
+.pc-per { font-size: var(--fs-xs); font-weight: 600; color: rgba(255, 255, 255, 0.85); }
 .pc-cta { width: 100%; margin-top: 12px; }
 .pc-wa { width: 100%; margin-top: 8px; min-height: 42px; font-size: var(--fs-sm); }
 .pc-wa .icon { width: 20px; height: 20px; }
 .pc-feats { display: grid; gap: 6px; margin-top: var(--sp-4); padding-top: var(--sp-3); border-top: 1px solid var(--c-primary-15); font-size: var(--fs-sm); color: var(--c-ink); }
 .pc-feats li { display: flex; gap: 8px; align-items: flex-start; line-height: 1.35; }
 .pc-feats .icon { width: 18px; height: 18px; margin-top: 1px; color: var(--c-primary); }
-.pc-title { margin-top: var(--sp-3); font-size: var(--fs-xs); font-weight: 700; color: var(--c-ink-strong); }
-.pc-apps { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
-.pc-apps .app svg { width: 26px; height: 26px; border-radius: 6px; display: block; }
+/* Apps: centradas y minimalistas (solo el logo en su color, sin cajas) */
+.pc-appsbox { margin-top: var(--sp-4); padding-top: var(--sp-3); border-top: 1px solid var(--c-primary-15); text-align: center; }
+.pc-title { font-size: var(--fs-xs); font-weight: 700; color: var(--c-ink-2); }
+.pc-apps { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 8px; }
+.pc-apps .app { display: grid; place-items: center; }
+.pc-apps .app svg { width: 22px; height: 22px; display: block; fill: currentColor; }
+.app--whatsapp { color: #25d366; }
+.app--facebook { color: #1877f2; }
+.app--instagram { color: #e1306c; }
+.app--spotify { color: #1db954; }
+.app--tiktok { color: #111; }
+.app--youtube { color: #ff0000; }
 /* Flechas y puntos del carrusel */
 .car-btn { display: none; }
 .car-dots { display: flex; justify-content: center; gap: 2px; margin-top: var(--sp-3); }
@@ -316,7 +355,7 @@ a.call-head:not(.is-static):active { transform: scale(0.98); }
 /* Móvil: la foto arriba, a todo el ancho, fundida hacia abajo con el azul */
 .porta-media { order: -1; margin: calc(var(--section-y) * -1) calc(var(--gutter) * -1) calc(var(--sp-7) * -1); height: 320px; }
 .porta-media img {
-  width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%;
+  width: 100%; height: 100%; object-fit: cover; object-position: 66% 20%;
   -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%); mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
 }
 @media (min-width: 900px) {
@@ -326,7 +365,7 @@ a.call-head:not(.is-static):active { transform: scale(0.98); }
   /* Escritorio: la foto ocupa el lado derecho de la sección, de borde a borde en alto */
   .porta-media { position: absolute; top: 0; right: 0; bottom: 0; width: min(46%, 620px); height: auto; margin: 0; }
   .porta-media img {
-    object-position: 50% 22%;
+    object-position: 62% 30%;
     -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 38%); mask-image: linear-gradient(to right, transparent 0%, #000 38%);
   }
 }

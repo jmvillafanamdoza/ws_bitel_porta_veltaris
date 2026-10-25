@@ -17,10 +17,10 @@
   <link rel="icon" href="favicon.png" type="image/png">
   <link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="assets/img/hero-persona.webp" fetchpriority="high">
-  <link rel="stylesheet" href="assets/css/tokens.css?v=20261024c">
-  <link rel="stylesheet" href="assets/css/bitel.css?v=20261024c">
-  <script src="assets/js/config.js?v=20261024c" defer></script>
-  <script src="assets/js/main.js?v=20261024c" defer></script>
+  <link rel="stylesheet" href="assets/css/tokens.css?v=20261024i">
+  <link rel="stylesheet" href="assets/css/bitel.css?v=20261024i">
+  <script src="assets/js/config.js?v=20261024i" defer></script>
+  <script src="assets/js/main.js?v=20261024i" defer></script>
 </head>
 <body data-version="bitel" class="has-sheet">
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -39,6 +39,8 @@
       <!-- Número del header: solo de 9 a.m. a 6 p.m. (config.contacto.horarioLlamadas).
            En celular se puede tocar para llamar; en PC es solo informativo. -->
       <a class="call-head" href="tel:+51939730787" data-tel data-call-head data-ubicacion="header" hidden><span class="call-ic"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-phone"></use></svg></span><span class="call-txt"><small>Llámanos</small><b data-tel-text>939 730 787</b></span></a>
+      <!-- Fuera del horario de llamadas: botón que abre el formulario -->
+      <button class="head-cta" type="button" data-open-modal data-ubicacion="header" data-head-cta><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-phone"></use></svg>Te llamamos</button>
     </div>
   </header>
 
@@ -55,47 +57,50 @@
       <div class="wrap hero-grid">
         <!-- Banner del plan destacado (config.destacado o ?plan=). El contenido lo completa main.js;
              lo de aquí es el respaldo sin JS. -->
-        <div class="offer" data-offer data-plan="ilimitado-79">
+        <div class="offer" data-offer data-plan="ilimitado-69">
           <div class="offer-copy">
             <p class="offer-tag" data-offer-tag>50% de descuento x 12 meses</p>
             <h1 data-headline>Cámbiate a <span translate="no">Bitel</span> <span class="hl">con tu mismo número</span></h1>
-            <p class="offer-plan"><span data-offer-nombre>Ilimitado 79.90</span> · <b data-offer-gb>250 GB</b> en alta velocidad</p>
+            <p class="offer-plan"><span data-offer-nombre>Ilimitado 69.90</span> · <b data-offer-gb>220 GB</b> en alta velocidad</p>
           </div>
           <div class="offer-mid">
             <div class="offer-price">
-              <p class="offer-before" data-offer-before>Antes <s>S/ 79.90</s></p>
-              <p class="offer-now"><span class="cur">S/</span><span data-offer-precio>39.90</span></p>
+              <p class="offer-before" data-offer-before>Antes <s>S/ 69.90</s></p>
+              <p class="offer-now"><span class="cur">S/</span><span data-offer-precio>34.90</span></p>
               <p class="offer-per" data-offer-per>al mes x 12 meses</p>
+              <p class="offer-save" data-offer-save>Ahorras S/ 420 en 12 meses</p>
             </div>
             <img class="offer-photo" src="assets/img/hero-persona.webp" alt="Mujer sonriendo mientras usa su celular" width="381" height="542" fetchpriority="high" decoding="async">
           </div>
           <ul class="offer-perks">
-            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-infinity"></use></svg>Internet, llamadas y SMS ilimitados</li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-infinity"></use></svg>Internet y llamadas ilimitadas</li>
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sim-card"></use></svg>Conservas tu número, sin costo</li>
           </ul>
           <div class="offer-ctas">
-            <button class="btn btn--accent btn--lg" type="button" data-elegir-plan="ilimitado-79" data-ubicacion="banner" data-offer-cta>Lo quiero</button>
+            <button class="btn btn--accent btn--lg" type="button" data-elegir-plan="ilimitado-69" data-ubicacion="banner" data-offer-cta>Lo quiero</button>
             <a class="btn btn--wa btn--lg" href="https://wa.me/51939730707?text=Hola%2C%20quiero%20portarme%20a%20Bitel%20con%20mi%20mismo%20n%C3%BAmero." data-wa data-ubicacion="hero" data-offer-wa><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-whatsapp-logo-fill"></use></svg>WhatsApp</a>
           </div>
         </div>
 
         <aside class="hero-form" id="formulario" aria-labelledby="hf-title">
           <div class="hero-form-head">
-            <p class="hf-kicker">¡Cámbiate ahora!</p>
-            <h2 id="hf-title">Déjanos tu número y te llamamos</h2>
-            <p>Un asesor te ayuda con tu portabilidad. Sin esperas.</p>
+            <span class="hf-ic" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-headset"></use></svg></span>
+            <div>
+              <p class="hf-kicker">¡Cámbiate ahora!</p>
+              <h2 id="hf-title">Déjanos tu número y te llamamos</h2>
+            </div>
           </div>
           <form class="quick-form" data-lead-form novalidate aria-labelledby="hf-title">
             <input type="hidden" name="plan" value="">
             <div class="qf-row">
               <div class="field">
                 <label for="hf-telefono">Número a portar</label>
-                <input id="hf-telefono" name="telefono" type="tel" inputmode="numeric" maxlength="9" autocomplete="tel-national" spellcheck="false" placeholder="9XX XXX XXX" required aria-describedby="hf-e-telefono">
+                <span class="input-wrap"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-phone"></use></svg><input id="hf-telefono" name="telefono" type="tel" inputmode="numeric" maxlength="9" autocomplete="tel-national" spellcheck="false" placeholder="9 dígitos" required aria-describedby="hf-e-telefono"></span>
                 <p class="field-error" id="hf-e-telefono" aria-live="polite"></p>
               </div>
               <div class="field">
                 <label for="hf-dni">DNI o RUC</label>
-                <input id="hf-dni" name="dni" type="text" inputmode="numeric" maxlength="11" autocomplete="off" spellcheck="false" placeholder="8 u 11 dígitos" required aria-describedby="hf-e-dni">
+                <span class="input-wrap"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-identification-card"></use></svg><input id="hf-dni" name="dni" type="text" inputmode="numeric" maxlength="11" autocomplete="off" spellcheck="false" placeholder="8 u 11 dígitos" required aria-describedby="hf-e-dni"></span>
                 <p class="field-error" id="hf-e-dni" aria-live="polite"></p>
               </div>
             </div>
@@ -111,6 +116,11 @@
             <p class="form-status" data-form-status role="alert"></p>
             <button class="btn btn--primary btn--lg btn--block" type="submit"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-phone"></use></svg>Llámenme</button>
           </form>
+          <ul class="hf-trust">
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-seal-percent"></use></svg>Portabilidad sin costo</li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-shield-check"></use></svg>Tus datos protegidos</li>
+            <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-headset"></use></svg>Distribuidor autorizado</li>
+          </ul>
         </aside>
       </div>
     </section>
@@ -130,7 +140,7 @@
       <div class="wrap">
         <div class="section-head">
           <h2 class="section-title" id="t-planes">Descubre tu <span class="hl-text">plan ideal</span></h2>
-          <p class="section-lead">Todos incluyen internet, llamadas y SMS ilimitados.</p>
+          <p class="section-lead">Todos incluyen internet y llamadas ilimitadas.</p>
         </div>
         <div class="plans-carousel" data-carousel>
           <button class="car-btn car-prev" type="button" data-car-prev aria-label="Ver planes anteriores"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-caret-left"></use></svg></button>
@@ -147,7 +157,7 @@
         <div class="porta-info">
           <h2 class="section-title" id="t-porta">Pásate a <span translate="no">Bitel</span> <span class="hl-text">en 3 pasos</span></h2>
           <ol class="steps">
-            <li><span class="step-n">1</span><div><p class="step-t">Elige tu plan</p><p class="step-d">Todos con internet, llamadas y SMS ilimitados.</p></div></li>
+            <li><span class="step-n">1</span><div><p class="step-t">Elige tu plan</p><p class="step-d">Todos con internet y llamadas ilimitadas.</p></div></li>
             <li><span class="step-n">2</span><div><p class="step-t">Déjanos tu número, llámanos o escríbenos</p><p class="step-d">Como te sea más cómodo. Un asesor te atiende al momento.</p></div></li>
             <li><span class="step-n">3</span><div><p class="step-t">Te ayudamos con la portabilidad</p><p class="step-d">Conservas tu número y tu línea queda lista en 24 a 72 horas hábiles.</p></div></li>
           </ol>
@@ -162,7 +172,7 @@
           <button class="btn btn--accent btn--lg porta-cta" type="button" data-open-modal data-ubicacion="requisitos">Quiero cambiarme a <span translate="no">Bitel</span></button>
         </div>
         <div class="porta-media">
-          <img src="assets/img/portabilidad-persona.webp" alt="Hombre con audífonos sonriendo mientras usa su celular" width="381" height="542" loading="lazy" decoding="async">
+          <img src="assets/img/porta-bitel-5g.webp" alt="Hombre con gorra sorprendido mientras navega en su celular" width="750" height="737" loading="lazy" decoding="async">
         </div>
       </div>
     </section>
@@ -226,19 +236,18 @@
     <div class="m-sheet-panel" id="ms-panel" role="region" aria-labelledby="ms-title">
       <div class="m-sheet-head">
         <h2 id="ms-title">Déjanos tu número y te llamamos</h2>
-        <button class="m-sheet-close" type="button" data-sheet-close aria-label="Minimizar formulario"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-caret-down"></use></svg></button>
       </div>
       <form class="quick-form quick-form--compact" data-lead-form novalidate aria-labelledby="ms-title">
         <input type="hidden" name="plan" value="">
         <div class="qf-row">
           <div class="field">
             <label class="sr-only" for="ms-telefono">Número a portar</label>
-            <input id="ms-telefono" name="telefono" type="tel" inputmode="numeric" maxlength="9" autocomplete="tel-national" spellcheck="false" placeholder="Número a portar" required aria-describedby="ms-e-telefono">
+            <span class="input-wrap"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-phone"></use></svg><input id="ms-telefono" name="telefono" type="tel" inputmode="numeric" maxlength="9" autocomplete="tel-national" spellcheck="false" placeholder="Tu celular" required aria-describedby="ms-e-telefono"></span>
             <p class="field-error" id="ms-e-telefono" aria-live="polite"></p>
           </div>
           <div class="field">
             <label class="sr-only" for="ms-dni">DNI o RUC</label>
-            <input id="ms-dni" name="dni" type="text" inputmode="numeric" maxlength="11" autocomplete="off" spellcheck="false" placeholder="DNI o RUC" required aria-describedby="ms-e-dni">
+            <span class="input-wrap"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-identification-card"></use></svg><input id="ms-dni" name="dni" type="text" inputmode="numeric" maxlength="11" autocomplete="off" spellcheck="false" placeholder="DNI o RUC" required aria-describedby="ms-e-dni"></span>
             <p class="field-error" id="ms-e-dni" aria-live="polite"></p>
           </div>
         </div>
@@ -257,7 +266,6 @@
         <button class="btn btn--primary btn--block" type="submit"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-phone"></use></svg>Llámenme</button>
       </form>
     </div>
-    <button class="m-sheet-tab" type="button" data-sheet-toggle aria-expanded="true" aria-controls="ms-panel"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-chat-circle-text"></use></svg><span>Déjanos tu número y te llamamos</span></button>
   </div>
 
   <!-- Escritorio: barra fija con formulario al salir del hero -->
@@ -268,12 +276,12 @@
         <input type="hidden" name="plan" value="">
         <div class="field">
           <label class="sr-only" for="ds-telefono">Número a portar</label>
-          <input id="ds-telefono" name="telefono" type="tel" inputmode="numeric" maxlength="9" autocomplete="tel-national" spellcheck="false" placeholder="Número a portar" required aria-describedby="ds-e-telefono">
+          <span class="input-wrap"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-phone"></use></svg><input id="ds-telefono" name="telefono" type="tel" inputmode="numeric" maxlength="9" autocomplete="tel-national" spellcheck="false" placeholder="Tu celular" required aria-describedby="ds-e-telefono"></span>
           <p class="field-error" id="ds-e-telefono" aria-live="polite"></p>
         </div>
         <div class="field">
           <label class="sr-only" for="ds-dni">DNI o RUC</label>
-          <input id="ds-dni" name="dni" type="text" inputmode="numeric" maxlength="11" autocomplete="off" spellcheck="false" placeholder="DNI o RUC" required aria-describedby="ds-e-dni">
+          <span class="input-wrap"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-identification-card"></use></svg><input id="ds-dni" name="dni" type="text" inputmode="numeric" maxlength="11" autocomplete="off" spellcheck="false" placeholder="DNI o RUC" required aria-describedby="ds-e-dni"></span>
           <p class="field-error" id="ds-e-dni" aria-live="polite"></p>
         </div>
         <div class="check">
@@ -284,10 +292,8 @@
         <p class="form-status" data-form-status role="alert"></p>
         <button class="btn btn--primary" type="submit"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-phone"></use></svg>Llámenme</button>
       </form>
-      <button class="d-sticky-close" type="button" data-dsticky-close aria-label="Cerrar formulario"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-x"></use></svg></button>
     </div>
   </section>
-  <button class="d-sticky-show" type="button" data-dsticky-show hidden><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-phone"></use></svg>Te llamamos</button>
 
   <dialog class="plan-modal" data-plan-modal aria-labelledby="pm-title">
     <div class="pm-grid">
@@ -317,12 +323,12 @@
             <div class="qf-row">
               <div class="field">
                 <label for="pm-telefono">Número a portar</label>
-                <input id="pm-telefono" name="telefono" type="tel" inputmode="numeric" maxlength="9" autocomplete="tel-national" spellcheck="false" placeholder="9XX XXX XXX" required aria-describedby="pm-e-telefono">
+                <span class="input-wrap"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-phone"></use></svg><input id="pm-telefono" name="telefono" type="tel" inputmode="numeric" maxlength="9" autocomplete="tel-national" spellcheck="false" placeholder="9 dígitos" required aria-describedby="pm-e-telefono"></span>
                 <p class="field-error" id="pm-e-telefono" aria-live="polite"></p>
               </div>
               <div class="field">
                 <label for="pm-dni">DNI o RUC</label>
-                <input id="pm-dni" name="dni" type="text" inputmode="numeric" maxlength="11" autocomplete="off" spellcheck="false" placeholder="8 u 11 dígitos" required aria-describedby="pm-e-dni">
+                <span class="input-wrap"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-identification-card"></use></svg><input id="pm-dni" name="dni" type="text" inputmode="numeric" maxlength="11" autocomplete="off" spellcheck="false" placeholder="8 u 11 dígitos" required aria-describedby="pm-e-dni"></span>
                 <p class="field-error" id="pm-e-dni" aria-live="polite"></p>
               </div>
             </div>

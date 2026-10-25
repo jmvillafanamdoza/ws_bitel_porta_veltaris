@@ -53,7 +53,7 @@ window.LANDING_CONFIG = {
   /* ---------- Plan del banner principal (hero) ----------
      Clave de "planes". Con ?plan=<clave> en la URL del anuncio se muestra ese plan.
      Conviene uno con promo: el precio tachado frente al precio a pagar convierte mejor. */
-  destacado: 'ilimitado-79',
+  destacado: 'ilimitado-69',
 
   /* ---------- Banners del hero (slides 2 y 3) ----------
      El slide 1 es el hero con el titular dinámico. Precio, GB y meses
@@ -97,33 +97,54 @@ window.LANDING_CONFIG = {
     porPlan: {
       'ilimitado-39': 'Todo ilimitado a *S/ 39.90* con tu mismo número',
       'ilimitado-49-5g': 'Pásate a Bitel *5G* con tu mismo número',
+      'ilimitado-55': '125 GB a *mitad de precio*',
+      'ilimitado-69': '220 GB a *mitad de precio*',
       'ilimitado-79': 'Plan Ilimitado 79.90 a *mitad de precio*'
     }
   },
 
   /* ---------- Planes ----------
-     DATOS REFERENCIALES tomados de la oferta pública de portabilidad
-     (consultada el 13/10/2026). VERIFICA precios, gigas, vigencia y
-     beneficios con la oferta vigente de Bitel antes de publicar.
+     DATOS de la web oficial bitel.com.pe/planes/control/ilimitado (consultada el 24/10/2026).
+     ORDEN = prioridad de venta: lo que más empuja Bitel en sus anuncios de Meta
+     (69.90, 55.90 y 79.90 con 50% de descuento). Vuelve a verificar antes de cada campaña.
+     OJO: en anuncios Bitel muestra S/ 34.95 y S/ 27.95; en su web, S/ 34.90 y S/ 27.90.
+     Aquí va lo de la web.
+     gb: lo grande de la tarjeta ('220 GB' o 'Ilimitados').
+     gbDetalle: línea bajo lo grande. datosExtra: segunda línea (opcional).
+     sms: '500 SMS' si no son ilimitados (si se omite: "Internet, llamadas y SMS ilimitados").
      promo: precio promocional y meses; null si no hay promoción.
-     apps: redes ilimitadas (spotify, instagram, facebook, whatsapp, tiktok, youtube).
-     bono (opcional): texto de la píldora bajo la cabecera, ej. 'Bono 20 GB x 6 meses'.
-       Si no existe y hay promo, se calcula solo ("Ahorra 50% x 12 meses").
-     beneficios (opcional): [{ icono, nombre, detalle }] con íconos de assets/icons.svg.
-       Si no existe: TV360 y, en planes 5G, "Red 5G - según cobertura". */
+     etiqueta: 'Más vendido' marca la tarjeta destacada; otro texto va en la etiqueta amarilla.
+     beneficios: [{ icono, nombre, detalle }] con íconos de assets/icons.svg.
+     apps: redes ilimitadas (whatsapp, facebook, instagram, spotify, tiktok, youtube). */
   planes: [
-    { clave: 'ilimitado-39', nombre: 'Ilimitado 39.90', gb: '45 GB', precio: '39.90', promo: null,
-      etiqueta: 'Más solicitado', cincoG: false, tv360: true, apps: ['whatsapp', 'facebook', 'instagram', 'spotify'] },
-    { clave: 'ilimitado-49-5g', nombre: 'Ilimitado 49.90 5G', gb: '120 GB', precio: '49.90', promo: null,
-      etiqueta: '', cincoG: true, tv360: true, apps: ['whatsapp', 'facebook', 'instagram', 'spotify'] },
-    { clave: 'ilimitado-55', nombre: 'Ilimitado 55.90', gb: '125 GB', precio: '55.90', promo: { precio: '27.95', meses: 6 },
-      etiqueta: '', cincoG: false, tv360: true, apps: ['whatsapp', 'facebook', 'instagram', 'spotify'] },
-    { clave: 'ilimitado-69', nombre: 'Ilimitado 69.90', gb: '220 GB', precio: '69.90', promo: { precio: '34.90', meses: 12 },
-      etiqueta: '', cincoG: false, tv360: true, apps: ['whatsapp', 'facebook', 'instagram', 'spotify'] },
-    { clave: 'ilimitado-79', nombre: 'Ilimitado 79.90', gb: '250 GB', precio: '79.90', promo: { precio: '39.90', meses: 12 },
-      etiqueta: '50% dscto.', cincoG: false, tv360: true, apps: ['whatsapp', 'facebook', 'instagram', 'spotify', 'tiktok'] },
-    { clave: 'ilimitado-105', nombre: 'Ilimitado 105.90', gb: '[160 GB]', precio: '105.90', promo: { precio: '52.95', meses: 12 },
-      etiqueta: '', cincoG: false, tv360: true, apps: ['whatsapp', 'facebook', 'instagram', 'spotify', 'tiktok'] }
+    { clave: 'ilimitado-69', nombre: 'Ilimitado 69.90', gb: '220 GB', gbDetalle: 'en alta velocidad', sms: '500 SMS',
+      precio: '69.90', promo: { precio: '34.90', meses: 12 }, etiqueta: 'Más vendido', cincoG: false,
+      beneficios: [ { icono: 'television-simple', nombre: 'TV360', detalle: 'x 6 meses' }, { icono: 'gift', nombre: 'Spotify', detalle: '15 GB x 6 meses' } ],
+      apps: ['facebook', 'instagram', 'spotify'] },
+    { clave: 'ilimitado-55', nombre: 'Ilimitado 55.90', gb: '185 GB', gbDetalle: 'por portabilidad (regular 125 GB)', datosExtra: 'Datos 5G ilimitados x 12 meses', sms: '500 SMS',
+      precio: '55.90', promo: { precio: '27.90', meses: 6 }, etiqueta: '', cincoG: false,
+      beneficios: [ { icono: 'television-simple', nombre: 'TV360', detalle: 'x 6 meses' }, { icono: 'gift', nombre: 'Spotify', detalle: '15 GB x 6 meses' } ],
+      apps: ['whatsapp', 'facebook', 'instagram', 'spotify'] },
+    { clave: 'ilimitado-79', nombre: 'Ilimitado 79.90', gb: 'Ilimitados', gbDetalle: 'Datos 4G + 5G x 12 meses', datosExtra: 'Luego 250 GB desde el mes 13',
+      precio: '79.90', promo: { precio: '39.90', meses: 12 }, etiqueta: '', cincoG: true,
+      beneficios: [ { icono: 'television-simple', nombre: 'TV360', detalle: 'x 6 meses' }, { icono: 'gift', nombre: 'Spotify', detalle: '20 GB x 6 meses' } ],
+      apps: ['facebook', 'instagram', 'spotify'] },
+    { clave: 'ilimitado-39', nombre: 'Ilimitado 39.90', gb: '110 GB', gbDetalle: 'por portabilidad (regular 45 GB)', datosExtra: 'Datos 4G + 5G ilimitados x 12 meses', sms: '500 SMS',
+      precio: '39.90', promo: null, etiqueta: '', cincoG: false,
+      beneficios: [ { icono: 'television-simple', nombre: 'TV360', detalle: 'x 6 meses' }, { icono: 'gift', nombre: 'Spotify', detalle: '10 GB x 6 meses' } ],
+      apps: ['whatsapp', 'facebook', 'instagram', 'spotify'] },
+    { clave: 'ilimitado-49-5g', nombre: 'Ilimitado 49.90 5G', gb: 'Ilimitados', gbDetalle: 'Datos 4G + 5G x 12 meses', datosExtra: 'Luego 120 GB desde el mes 13',
+      precio: '49.90', promo: null, etiqueta: '', cincoG: true,
+      beneficios: [ { icono: 'television-simple', nombre: 'TV360', detalle: 'x 6 meses' } ],
+      apps: ['whatsapp', 'facebook', 'instagram'] },
+    { clave: 'ilimitado-99', nombre: 'Ilimitado 99.90', gb: 'Ilimitados', gbDetalle: 'Datos 5G x 12 meses', datosExtra: 'Luego 300 GB',
+      precio: '99.90', promo: { precio: '49.90', meses: 12 }, etiqueta: '', cincoG: true,
+      beneficios: [ { icono: 'television-simple', nombre: 'TV360', detalle: 'x 6 meses' } ],
+      apps: ['facebook', 'instagram'] },
+    { clave: 'ilimitado-105', nombre: 'Ilimitado 105.90', gb: 'Ilimitados', gbDetalle: 'Datos 5G x 12 meses', datosExtra: 'Luego 350 GB desde el mes 13',
+      precio: '105.90', promo: { precio: '52.90', meses: 12 }, etiqueta: '', cincoG: true,
+      beneficios: [ { icono: 'television-simple', nombre: 'TV360', detalle: 'x 6 meses' }, { icono: 'gift', nombre: 'Spotify', detalle: '20 GB x 6 meses' } ],
+      apps: ['facebook', 'instagram', 'spotify'] }
   ],
 
   // Operadores de origen (Bitel no va: es el destino).
