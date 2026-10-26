@@ -36,10 +36,10 @@
   <link rel="icon" href="favicon.png" type="image/png">
   <link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="assets/img/hero-persona.webp" fetchpriority="high">
-  <link rel="stylesheet" href="assets/css/tokens.css?v=20261025a">
-  <link rel="stylesheet" href="assets/css/bitel.css?v=20261025a">
-  <script src="assets/js/config.js?v=20261025a" defer></script>
-  <script src="assets/js/main.js?v=20261025a" defer></script>
+  <link rel="stylesheet" href="assets/css/tokens.css?v=20261025c">
+  <link rel="stylesheet" href="assets/css/bitel.css?v=20261025c">
+  <script src="assets/js/config.js?v=20261025c" defer></script>
+  <script src="assets/js/main.js?v=20261025c" defer></script>
 </head>
 <body data-version="bitel" class="has-sheet">
   <!-- Google Tag Manager (noscript) -->
@@ -80,18 +80,18 @@
       <div class="wrap hero-grid">
         <!-- Banner del plan destacado (config.destacado o ?plan=). El contenido lo completa main.js;
              lo de aquí es el respaldo sin JS. -->
-        <div class="offer" data-offer data-plan="ilimitado-69">
+        <div class="offer" data-offer data-plan="ilimitado-55">
           <div class="offer-copy">
-            <p class="offer-tag" data-offer-tag>50% de descuento x 12 meses</p>
+            <p class="offer-tag" data-offer-tag>50% de descuento x 6 meses</p>
             <h1 data-headline>Cámbiate a <span translate="no">Bitel</span> <span class="hl">con tu mismo número</span></h1>
-            <p class="offer-plan"><span data-offer-nombre>Ilimitado 69.90</span> · <b data-offer-gb>220 GB</b> en alta velocidad</p>
+            <p class="offer-plan"><span data-offer-nombre>Ilimitado 55.90</span> · <b data-offer-gb>185 GB</b> en alta velocidad</p>
           </div>
           <div class="offer-mid">
             <div class="offer-price">
-              <p class="offer-before" data-offer-before>Antes <s>S/ 69.90</s></p>
-              <p class="offer-now"><span class="cur">S/</span><span data-offer-precio>34.90</span></p>
-              <p class="offer-per" data-offer-per>al mes x 12 meses</p>
-              <p class="offer-save" data-offer-save>Ahorras S/ 420 en 12 meses</p>
+              <p class="offer-before" data-offer-before>Antes <s>S/ 55.90</s></p>
+              <p class="offer-now"><span class="cur">S/</span><span data-offer-precio>27.90</span></p>
+              <p class="offer-per" data-offer-per>al mes x 6 meses</p>
+              <p class="offer-save" data-offer-save>Ahorras S/ 168 en 6 meses</p>
             </div>
             <img class="offer-photo" src="assets/img/hero-persona.webp" alt="Mujer sonriendo mientras usa su celular" width="381" height="542" fetchpriority="high" decoding="async">
           </div>
@@ -100,7 +100,7 @@
             <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-sim-card"></use></svg>Conservas tu número, sin costo</li>
           </ul>
           <div class="offer-ctas">
-            <button class="btn btn--accent btn--lg" type="button" data-elegir-plan="ilimitado-69" data-ubicacion="banner" data-offer-cta>Lo quiero</button>
+            <button class="btn btn--accent btn--lg" type="button" data-elegir-plan="ilimitado-55" data-ubicacion="banner" data-offer-cta>Lo quiero</button>
             <a class="btn btn--wa btn--lg" href="https://wa.me/51939730707?text=Hola%2C%20quiero%20portarme%20a%20Bitel%20con%20mi%20mismo%20n%C3%BAmero." data-wa data-ubicacion="hero" data-offer-wa><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-whatsapp-logo-fill"></use></svg>WhatsApp</a>
           </div>
         </div>
@@ -189,7 +189,8 @@
             <ul>
               <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-identification-card"></use></svg>Ser titular de la línea a portar</li>
               <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-prohibit"></use></svg>No tener otra solicitud de portabilidad en trámite</li>
-              <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-calendar-blank"></use></svg>Tener más de 1 mes con tu operador actual</li>
+              <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-calendar-blank"></use></svg>Tener más de 30 días con tu operador actual</li>
+              <li><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-receipt"></use></svg>No tener deudas vencidas con tu operador actual</li>
             </ul>
           </div>
           <button class="btn btn--accent btn--lg porta-cta" type="button" data-open-modal data-ubicacion="requisitos">Quiero cambiarme a <span translate="no">Bitel</span></button>
@@ -218,7 +219,7 @@
           </details>
           <details>
             <summary><span>¿Qué necesito para portarme?</span></summary>
-            <p>Ser titular de la línea, tener tu DNI a la mano, no tener otra portabilidad en trámite y más de 1 mes con tu operador actual.</p>
+            <p>Ser titular de la línea, validar tu identidad (validación biométrica), tener más de 30 días con tu operador actual, no tener deudas vencidas con él y no tener otra portabilidad en trámite.</p>
           </details>
           <details>
             <summary><span>¿Ustedes son <span translate="no">Bitel</span>?</span></summary>
@@ -242,9 +243,10 @@
         </address>
       </div>
       <nav class="footer-links" aria-label="Enlaces legales">
-        <a href="privacidad.html">Política de privacidad</a>
-        <a href="terminos.html">Términos y condiciones</a>
-        <a href="terminos.html#libro-reclamaciones">Libro de reclamaciones</a>
+        <a href="privacidad.html" target="_blank" rel="noopener">Política de privacidad</a>
+        <a href="cookies.html" target="_blank" rel="noopener">Política de cookies</a>
+        <a href="terminos.html" target="_blank" rel="noopener">Términos y condiciones</a>
+        <a class="link-inactivo" role="link" aria-disabled="true">Libro de reclamaciones</a>
       </nav>
       <div class="footer-copy">
         <p>© <span data-year>2026</span> <span data-distribuidor>VELTARIS CONTACT CENTER E.I.R.L.</span>. Distribuidor autorizado de Bitel. No somos el portal oficial de Viettel Perú S.A.C. Bitel y sus logotipos son marcas de Viettel Perú S.A.C.</p>
@@ -405,7 +407,7 @@
   <a class="wa-float wa-float--desk" href="https://wa.me/51939730707?text=Hola%2C%20quiero%20portarme%20a%20Bitel%20con%20mi%20mismo%20n%C3%BAmero." data-wa data-ubicacion="flotante" aria-label="Escríbenos por WhatsApp"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-whatsapp-logo-fill"></use></svg><span>¿Dudas? Escríbenos</span></a>
 
   <div class="cookie-banner" data-cookie-banner role="region" aria-label="Aviso de cookies" hidden>
-    <p>Usamos cookies propias y de Google para medir el rendimiento de nuestros anuncios. <a href="privacidad.html#cookies">Ver política de cookies</a>.</p>
+    <p>Usamos cookies propias y de Google para medir el rendimiento de nuestros anuncios. <a href="cookies.html" target="_blank" rel="noopener">Ver política de cookies</a>.</p>
     <div class="cookie-actions">
       <button class="btn btn--primary btn--sm" type="button" data-cookie="accept">Aceptar</button>
       <button class="btn btn--outline btn--sm" type="button" data-cookie="reject">Rechazar</button>

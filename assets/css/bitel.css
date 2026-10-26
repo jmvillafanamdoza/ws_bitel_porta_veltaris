@@ -550,9 +550,16 @@ a.call-head:not(.is-static):active { transform: scale(0.98); }
 }
 .cookie-banner[hidden] { display: none; }
 .cookie-actions { display: flex; gap: 8px; }
+/* Escritorio: al centro de la pantalla con el fondo atenuado, para que se vea y se acepte.
+   La sombra hace de fondo pero no bloquea la página (se puede seguir navegando). */
 @media (min-width: 900px) {
-  .cookie-banner { top: auto; bottom: 24px; left: 24px; right: auto; max-width: 420px; }
-  .dbar-on .cookie-banner { bottom: 100px; }
+  .cookie-banner {
+    top: 50%; left: 50%; right: auto; bottom: auto; transform: translate(-50%, -50%);
+    width: min(480px, calc(100% - 48px)); gap: 14px; padding: 24px 26px; border-radius: var(--r-lg);
+    font-size: var(--fs-sm); text-align: center; box-shadow: 0 0 0 100vmax rgba(2, 30, 50, 0.45), var(--sh-3);
+  }
+  .cookie-actions { justify-content: center; }
+  .cookie-actions .btn { min-width: 140px; }
 }
 
 /* ---------- Páginas simples: gracias y legales ---------- */
@@ -579,3 +586,6 @@ a.call-head:not(.is-static):active { transform: scale(0.98); }
 .placeholder-note { padding: 10px 14px; border-radius: var(--r-sm); background: #fff8c4; color: var(--c-primary-900) !important; font-weight: 600; }
 .page-simple ~ .site-footer, body:not(.has-sheet) .site-footer { padding-bottom: 100px; }
 @media (min-width: 900px) { body:not(.has-sheet) .site-footer { padding-bottom: var(--sp-7); } }
+
+/* "Libro de reclamaciones": se ve como enlace pero aún no lleva a ningún sitio */
+.link-inactivo { color: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: default; }

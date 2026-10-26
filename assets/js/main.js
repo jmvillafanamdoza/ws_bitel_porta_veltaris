@@ -95,6 +95,14 @@
     });
   });
 
+  // Política de cookies: "Cambiar mis preferencias" borra la elección y vuelve a mostrar el aviso.
+  $$('[data-cookie-reset]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (local) local.removeItem('cookie_consent');
+      if (banner) { banner.hidden = false; var b = $('[data-cookie="accept"]', banner); if (b) b.focus(); }
+    });
+  });
+
   /* ---------- Atribución: gclid, gbraid, wbraid y UTM ---------- */
   var CAMPOS_ATRIB = ['gclid', 'gbraid', 'wbraid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
   var atrib = {};

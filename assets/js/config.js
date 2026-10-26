@@ -42,7 +42,7 @@ window.LANDING_CONFIG = {
     whatsapp: '51939730707',              // WHATSAPP: solo dígitos, con 51, sin "+"
     whatsappTexto: '939 730 707',         // WHATSAPP: texto visible
     whatsappMensaje: 'Hola, quiero portarme a Bitel con mi mismo número.',
-    horarioAtencion: '[Lunes a domingo de 8 a.m. a 10 p.m.]',  // texto de la página de gracias
+    horarioAtencion: 'De 9 a.m. a 6 p.m.',  // texto informativo del horario de atención
     // El número del header solo se muestra en este horario (hora de Lima, 24 h).
     horarioLlamadas: { desde: 9, hasta: 18 }
   },
@@ -53,7 +53,7 @@ window.LANDING_CONFIG = {
   /* ---------- Plan del banner principal (hero) ----------
      Clave de "planes". Con ?plan=<clave> en la URL del anuncio se muestra ese plan.
      Conviene uno con promo: el precio tachado frente al precio a pagar convierte mejor. */
-  destacado: 'ilimitado-69',
+  destacado: 'ilimitado-55',
 
   /* ---------- Banners del hero (slides 2 y 3) ----------
      El slide 1 es el hero con el titular dinámico. Precio, GB y meses
@@ -75,16 +75,17 @@ window.LANDING_CONFIG = {
      reales de las promociones vigentes y del consentimiento del distribuidor. */
   legal: {
     terminos: [
-      'Precios en soles, incluyen IGV. Gigas en alta velocidad.',
-      'Los precios promocionales aplican por los meses indicados en cada plan; luego rige el precio regular.',
-      'Planes y promociones sujetos a la oferta vigente de Bitel, evaluación crediticia y cobertura. Beneficio 5G sujeto a cobertura y equipo compatible.',
-      '[Vigencia de la promoción: del DD/MM/AAAA al DD/MM/AAAA.]',
-      '[PLACEHOLDER: pegar aquí los términos y restricciones oficiales de las promociones Bitel vigentes.]'
+      'Precios en soles, incluyen IGV. Planes válidos a nivel nacional, sujetos a la cobertura de Bitel.',
+      'Las promociones, precios, gigas y plazos corresponden a la oferta de portabilidad publicada por Bitel y están sujetos a su vigencia, al canal de contratación y a evaluación. El asesor te confirmará la promoción aplicable antes de contratar.',
+      'Los planes Ilimitado 39.90 a 69.90 incluyen 500 SMS; desde el Ilimitado 79.90, SMS ilimitados. Al agotarse los GB en alta velocidad, sigues navegando con internet ilimitado a 0.512 Mbps de bajada.',
+      'Perderás la promoción si migras a un plan menor o a prepago, si portas a otro operador o si tu línea se suspende por falta de pago.',
+      'Requisitos: ser titular de la línea, validación biométrica, más de 30 días con tu operador actual y no tener deudas vencidas con él.',
+      'Términos completos en portabilidadbitel.pe/terminos.html.'
     ],
     consentimiento: [
-      'Al marcar esta casilla autorizas a VELTARIS CONTACT CENTER E.I.R.L., distribuidor autorizado de Bitel, a usar tus datos de contacto para enviarte ofertas, promociones y novedades de productos y servicios Bitel por llamada, SMS, WhatsApp o correo.',
-      'Esta autorización es opcional y no condiciona tu solicitud de portabilidad. Puedes revocarla en cualquier momento escribiendo a [correo de privacidad].',
-      '[PLACEHOLDER: texto de consentimiento comercial del distribuidor, conforme a la Ley N.º 29733.]'
+      'Al marcar esta casilla autorizas a VELTARIS CONTACT CENTER E.I.R.L. (RUC 20615173992), distribuidor autorizado de Bitel, a usar tu número de celular y tu DNI o RUC para enviarte ofertas, promociones y novedades de productos y servicios Bitel por llamada, SMS o WhatsApp.',
+      'Esta autorización es opcional y no condiciona tu solicitud de portabilidad. Puedes revocarla en cualquier momento llamando al 939 730 787 o escribiendo por WhatsApp al 939 730 707.',
+      'Tus datos se tratan conforme a la Ley N.º 29733 y a nuestra Política de privacidad (portabilidadbitel.pe/privacidad.html).'
     ]
   },
 
@@ -105,8 +106,9 @@ window.LANDING_CONFIG = {
 
   /* ---------- Planes ----------
      DATOS de la web oficial bitel.com.pe/planes/control/ilimitado (consultada el 24/10/2026).
-     ORDEN = prioridad de venta: lo que más empuja Bitel en sus anuncios de Meta
-     (69.90, 55.90 y 79.90 con 50% de descuento). Vuelve a verificar antes de cada campaña.
+     ORDEN = prioridad de venta. El 55.90 va primero: su 50% x 6 meses es la promo de
+     Bitel exclusiva del canal telefónico (el 50% del 69.90 es solo para tiendas físicas).
+     Vuelve a verificar antes de cada campaña (las promos de octubre vencen el 31/10/2026).
      OJO: en anuncios Bitel muestra S/ 34.95 y S/ 27.95; en su web, S/ 34.90 y S/ 27.90.
      Aquí va lo de la web.
      gb: lo grande de la tarjeta ('220 GB' o 'Ilimitados').
@@ -117,14 +119,14 @@ window.LANDING_CONFIG = {
      beneficios: [{ icono, nombre, detalle }] con íconos de assets/icons.svg.
      apps: redes ilimitadas (whatsapp, facebook, instagram, spotify, tiktok, youtube). */
   planes: [
-    { clave: 'ilimitado-69', nombre: 'Ilimitado 69.90', gb: '220 GB', gbDetalle: 'en alta velocidad', sms: '500 SMS',
-      precio: '69.90', promo: { precio: '34.90', meses: 12 }, etiqueta: 'Más vendido', cincoG: false,
-      beneficios: [ { icono: 'television-simple', nombre: 'TV360', detalle: 'x 6 meses' }, { icono: 'gift', nombre: 'Spotify', detalle: '15 GB x 6 meses' } ],
-      apps: ['facebook', 'instagram', 'spotify'] },
     { clave: 'ilimitado-55', nombre: 'Ilimitado 55.90', gb: '185 GB', gbDetalle: 'por portabilidad (regular 125 GB)', datosExtra: 'Datos 5G ilimitados x 12 meses', sms: '500 SMS',
-      precio: '55.90', promo: { precio: '27.90', meses: 6 }, etiqueta: '', cincoG: false,
+      precio: '55.90', promo: { precio: '27.90', meses: 6 }, etiqueta: 'Más vendido', cincoG: false,
       beneficios: [ { icono: 'television-simple', nombre: 'TV360', detalle: 'x 6 meses' }, { icono: 'gift', nombre: 'Spotify', detalle: '15 GB x 6 meses' } ],
       apps: ['whatsapp', 'facebook', 'instagram', 'spotify'] },
+    { clave: 'ilimitado-69', nombre: 'Ilimitado 69.90', gb: '220 GB', gbDetalle: 'en alta velocidad', sms: '500 SMS',
+      precio: '69.90', promo: { precio: '34.90', meses: 12 }, etiqueta: '', cincoG: false,
+      beneficios: [ { icono: 'television-simple', nombre: 'TV360', detalle: 'x 6 meses' }, { icono: 'gift', nombre: 'Spotify', detalle: '15 GB x 6 meses' } ],
+      apps: ['facebook', 'instagram', 'spotify'] },
     { clave: 'ilimitado-79', nombre: 'Ilimitado 79.90', gb: 'Ilimitados', gbDetalle: 'Datos 4G + 5G x 12 meses', datosExtra: 'Luego 250 GB desde el mes 13',
       precio: '79.90', promo: { precio: '39.90', meses: 12 }, etiqueta: '', cincoG: true,
       beneficios: [ { icono: 'television-simple', nombre: 'TV360', detalle: 'x 6 meses' }, { icono: 'gift', nombre: 'Spotify', detalle: '20 GB x 6 meses' } ],
