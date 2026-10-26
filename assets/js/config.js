@@ -13,8 +13,8 @@ window.LANDING_CONFIG = {
                   eventos al dataLayer; las conversiones se configuran en GTM.
      Mientras el ID siga con corchetes no se carga ningún script. */
   tracking: {
-    modo: 'gtag',
-    id: '[AW-XXXXXXXXXX]',
+    modo: 'gtm',
+    id: 'GTM-W9JPSV6K',    // contenedor de GTM (el snippet también está en el <head> de cada página)
     conversiones: {
       lead: '[AW-XXXXXXXXXX/ETIQUETA_LEAD]',          // principal: se dispara en gracias.html
       envioFormulario: '[AW-XXXXXXXXXX/ETIQUETA_FORM]', // secundaria

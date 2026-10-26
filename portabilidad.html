@@ -3,6 +3,25 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- Consent Mode v2: todo "denied" hasta que el usuario acepte cookies. Va ANTES de GTM. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    (function () {
+      var c = null;
+      try { c = localStorage.getItem('cookie_consent'); } catch (e) {}
+      var g = c === 'granted' ? 'granted' : 'denied';
+      gtag('consent', 'default', { ad_storage: g, ad_user_data: g, ad_personalization: g, analytics_storage: g, wait_for_update: 500 });
+      window.__consentDefault = true;
+    })();
+  </script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W9JPSV6K');</script>
+  <!-- End Google Tag Manager -->
   <title>Portabilidad Bitel: cámbiate con tu mismo número | Distribuidor autorizado</title>
   <meta name="description" content="Pásate a Bitel conservando tu número. Planes ilimitados desde S/ 39.90 al mes. Portabilidad sin costo, lista en 24 a 72 horas. Distribuidor autorizado de Bitel.">
   <meta name="robots" content="index, follow">
@@ -17,12 +36,16 @@
   <link rel="icon" href="favicon.png" type="image/png">
   <link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="image" href="assets/img/hero-persona.webp" fetchpriority="high">
-  <link rel="stylesheet" href="assets/css/tokens.css?v=20261024i">
-  <link rel="stylesheet" href="assets/css/bitel.css?v=20261024i">
-  <script src="assets/js/config.js?v=20261024i" defer></script>
-  <script src="assets/js/main.js?v=20261024i" defer></script>
+  <link rel="stylesheet" href="assets/css/tokens.css?v=20261025a">
+  <link rel="stylesheet" href="assets/css/bitel.css?v=20261025a">
+  <script src="assets/js/config.js?v=20261025a" defer></script>
+  <script src="assets/js/main.js?v=20261025a" defer></script>
 </head>
 <body data-version="bitel" class="has-sheet">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W9JPSV6K"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
   <header class="site-header">
@@ -90,7 +113,7 @@
               <h2 id="hf-title">Déjanos tu número y te llamamos</h2>
             </div>
           </div>
-          <form class="quick-form" data-lead-form novalidate aria-labelledby="hf-title">
+          <form class="quick-form" data-lead-form data-form="hero" novalidate aria-labelledby="hf-title">
             <input type="hidden" name="plan" value="">
             <div class="qf-row">
               <div class="field">
@@ -237,7 +260,7 @@
       <div class="m-sheet-head">
         <h2 id="ms-title">Déjanos tu número y te llamamos</h2>
       </div>
-      <form class="quick-form quick-form--compact" data-lead-form novalidate aria-labelledby="ms-title">
+      <form class="quick-form quick-form--compact" data-lead-form data-form="panel-movil" novalidate aria-labelledby="ms-title">
         <input type="hidden" name="plan" value="">
         <div class="qf-row">
           <div class="field">
@@ -272,7 +295,7 @@
   <section class="d-sticky" data-dsticky aria-labelledby="ds-title" inert>
     <div class="wrap d-sticky-inner">
       <p class="d-sticky-text" id="ds-title">Déjanos tus datos y <strong>te llamamos</strong></p>
-      <form class="sticky-form" data-lead-form novalidate aria-labelledby="ds-title">
+      <form class="sticky-form" data-lead-form data-form="barra-escritorio" novalidate aria-labelledby="ds-title">
         <input type="hidden" name="plan" value="">
         <div class="field">
           <label class="sr-only" for="ds-telefono">Número a portar</label>
@@ -318,7 +341,7 @@
               <p class="pm-plan-per" data-pm-per></p>
             </div>
           </div>
-          <form class="quick-form" data-lead-form novalidate aria-labelledby="pm-title">
+          <form class="quick-form" data-lead-form data-form="popup" novalidate aria-labelledby="pm-title">
             <input type="hidden" name="plan" value="">
             <div class="qf-row">
               <div class="field">

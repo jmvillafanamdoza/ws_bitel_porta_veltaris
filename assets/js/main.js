@@ -39,13 +39,17 @@
   var savedConsent = local ? local.getItem('cookie_consent') : null;
   var granted = savedConsent === 'granted' ? 'granted' : 'denied';
 
-  window.gtag('consent', 'default', {
-    ad_storage: granted, ad_user_data: granted, ad_personalization: granted,
-    analytics_storage: granted, wait_for_update: 500
-  });
+  // Si el <head> ya fijó el consentimiento y cargó GTM (snippet oficial), no se repite.
+  if (!window.__consentDefault) {
+    window.gtag('consent', 'default', {
+      ad_storage: granted, ad_user_data: granted, ad_personalization: granted,
+      analytics_storage: granted, wait_for_update: 500
+    });
+  }
 
   var trackingActivo = !isPlaceholder(T.id);
-  if (trackingActivo) {
+  var gtmEnHead = !!doc.querySelector('script[src*="googletagmanager.com/gtm.js"]') || window.dataLayer.some(function (x) { return x && x.event === 'gtm.js'; });
+  if (trackingActivo && !(T.modo === 'gtm' && gtmEnHead)) {
     var s = doc.createElement('script');
     s.async = true;
     if (T.modo === 'gtm') {
@@ -147,12 +151,43 @@
   pintarLlamada();
   setInterval(pintarLlamada, 60000);
 
+  // Zona de la página donde está un elemento (para saber desde dónde se hizo clic).
+  var ZONAS = [
+    ['.site-header', 'header'], ['.promo-strip', 'barra-promo'], ['.offer', 'banner'], ['.hero-form', 'formulario-hero'],
+    ['.perks', 'ventajas'], ['#planes', 'planes'], ['#requisitos', 'pasos'], ['#preguntas', 'preguntas'],
+    ['.site-footer', 'footer'], ['.m-sheet', 'panel-movil'], ['.d-sticky', 'barra-escritorio'],
+    ['.plan-modal', 'popup'], ['.legal-modal', 'popup-legal'], ['.cookie-banner', 'cookies'], ['.wa-float', 'flotante']
+  ];
+  function zonaDe(el) {
+    for (var i = 0; i < ZONAS.length; i++) if (el.closest(ZONAS[i][0])) return ZONAS[i][1];
+    return 'otra';
+  }
+
+  // Todos los botones y enlaces envían "click_boton" (texto, zona, plan y tipo de destino),
+  // para poder crear en GTM un activador por cualquier botón sin tocar el código.
+  doc.addEventListener('click', function (e) {
+    var el = e.target.closest && e.target.closest('a, button');
+    if (!el) return;
+    var href = el.getAttribute('href') || '';
+    var destino = href.indexOf('tel:') === 0 ? 'llamada' : href.indexOf('wa.me') !== -1 ? 'whatsapp'
+      : el.matches('[data-open-modal], [data-elegir-plan], [data-head-cta]') ? 'abrir_formulario'
+      : el.type === 'submit' ? 'enviar_formulario' : href.charAt(0) === '#' ? 'ancla' : href ? 'enlace' : 'boton';
+    window.dataLayer.push({
+      event: 'click_boton',
+      boton: (el.innerText || el.getAttribute('aria-label') || '').replace(/\s+/g, ' ').trim().slice(0, 60),
+      zona: zonaDe(el),
+      destino: destino,
+      plan: el.getAttribute('data-plan') || el.getAttribute('data-elegir-plan') || '',
+      landing_version: VERSION
+    });
+  }, true);
+
   // Clics de WhatsApp y llamada como conversión (delegado: cubre todos los enlaces).
   doc.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[href]');
     if (!a) return;
     var href = a.getAttribute('href') || '';
-    var datos = { ubicacion: a.getAttribute('data-ubicacion') || '', plan: a.getAttribute('data-plan') || '' };
+    var datos = { ubicacion: a.getAttribute('data-ubicacion') || zonaDe(a), plan: a.getAttribute('data-plan') || '' };
     if (href.indexOf('tel:') === 0) track('click_llamar', 'llamada', datos);
     else if (href.indexOf('wa.me') !== -1) track('click_whatsapp', 'whatsapp', datos);
   });
@@ -786,8 +821,9 @@
       function ocultarCarga() { if (cargando && cargando.open) cargando.close(); }
 
       function exito() {
-        if (session) session.setItem('lead_pendiente', JSON.stringify({ version: VERSION, plan: data.plan, t: Date.now() }));
-        track('envio_formulario', 'envioFormulario', { plan: data.plan }, function () {
+        var origen = form.getAttribute('data-form') || '';
+        if (session) session.setItem('lead_pendiente', JSON.stringify({ version: VERSION, plan: data.plan, formulario: origen, t: Date.now() }));
+        track('envio_formulario', 'envioFormulario', { plan: data.plan, formulario: origen }, function () {
           location.href = (C.formulario && C.formulario.paginaGracias || 'gracias.html') + '?v=' + encodeURIComponent(VERSION);
         });
       }
@@ -872,7 +908,7 @@
       var info = {};
       try { info = JSON.parse(pendiente); } catch (e) { info = {}; }
       session.removeItem('lead_pendiente'); // recargar la página no duplica la conversión
-      track('lead_confirmado', 'lead', { plan: info.plan || '', landing_version: info.version || '' });
+      track('lead_confirmado', 'lead', { plan: info.plan || '', formulario: info.formulario || '', landing_version: info.version || '' });
     }
   }
 })();
