@@ -35,6 +35,15 @@
   function gtag() { window.dataLayer.push(arguments); }
   window.gtag = window.gtag || gtag;
 
+  // GTM recuerda los datos de eventos anteriores: cada evento borra los que no trae
+  // para que GA4 no reciba, por ejemplo, el "formulario" de un evento previo.
+  var CAMPOS_EVENTO = ['boton', 'zona', 'destino', 'plan', 'formulario', 'ubicacion'];
+  function pushEvento(datos) {
+    var limpio = {};
+    CAMPOS_EVENTO.forEach(function (k) { limpio[k] = undefined; });
+    window.dataLayer.push(Object.assign(limpio, datos));
+  }
+
   var T = C.tracking || {};
   var savedConsent = local ? local.getItem('cookie_consent') : null;
   var granted = savedConsent === 'granted' ? 'granted' : 'denied';
@@ -69,7 +78,7 @@
     var done = false;
     function finish() { if (!done) { done = true; if (cb) cb(); } }
     var payload = Object.assign({ event: evento, landing_version: VERSION }, datos || {});
-    window.dataLayer.push(payload);
+    pushEvento(payload);
 
     var sendTo = (T.conversiones || {})[claveConversion];
     if (trackingActivo && T.modo !== 'gtm' && !isPlaceholder(sendTo)) {
@@ -180,7 +189,7 @@
     var destino = href.indexOf('tel:') === 0 ? 'llamada' : href.indexOf('wa.me') !== -1 ? 'whatsapp'
       : el.matches('[data-open-modal], [data-elegir-plan], [data-head-cta]') ? 'abrir_formulario'
       : el.type === 'submit' ? 'enviar_formulario' : href.charAt(0) === '#' ? 'ancla' : href ? 'enlace' : 'boton';
-    window.dataLayer.push({
+    pushEvento({
       event: 'click_boton',
       boton: (el.innerText || el.getAttribute('aria-label') || '').replace(/\s+/g, ' ').trim().slice(0, 60),
       zona: zonaDe(el),
@@ -586,7 +595,7 @@
     actualizarBloqueo();
     var tel = $('input[name="telefono"]', modal);
     if (tel) setTimeout(function () { tel.focus(); }, 60);
-    window.dataLayer.push({ event: 'abrir_modal_plan', plan: clave || '', ubicacion: ubicacion || '', landing_version: VERSION });
+    pushEvento({ event: 'abrir_modal_plan', plan: clave || '', ubicacion: ubicacion || '', landing_version: VERSION });
     return true;
   }
   function cerrarModal() { if (modal && modal.open) modal.close(); }
@@ -595,7 +604,7 @@
     b.addEventListener('click', function () {
       cerrarMenu();
       var ub = b.getAttribute('data-ubicacion') || '';
-      if (ub === 'banner') window.dataLayer.push({ event: 'click_banner', plan: '', ubicacion: ub, landing_version: VERSION });
+      if (ub === 'banner') pushEvento({ event: 'click_banner', plan: '', ubicacion: ub, landing_version: VERSION });
       if (!abrirModal('', ub)) { var f = $('#formulario'); if (f) f.scrollIntoView({ block: 'center' }); }
     });
   });
@@ -637,7 +646,7 @@
     var dlg = $('dialog[data-legal="' + tipo + '"]');
     if (!dlg || typeof dlg.showModal !== 'function') return;
     dlg._abrir(b);
-    window.dataLayer.push({ event: tipo === 'terminos' ? 'abrir_modal_terminos' : 'abrir_modal_consentimiento', landing_version: VERSION });
+    pushEvento({ event: tipo === 'terminos' ? 'abrir_modal_terminos' : 'abrir_modal_consentimiento', landing_version: VERSION });
   }, true);
 
   // "Lo quiero" y "Quiero portarme": llevan al formulario rápido (hero en escritorio, panel en móvil).
@@ -648,7 +657,7 @@
     if (clave) {
       var ub = b.getAttribute('data-ubicacion') || 'card';
       marcarPlan(clave);
-      window.dataLayer.push({ event: ub === 'banner' ? 'click_banner' : 'elegir_plan', plan: clave, ubicacion: ub, landing_version: VERSION });
+      pushEvento({ event: ub === 'banner' ? 'click_banner' : 'elegir_plan', plan: clave, ubicacion: ub, landing_version: VERSION });
       e.preventDefault();
       if (abrirModal(clave, ub)) return;
     }
@@ -715,7 +724,7 @@
       var sl = e.target.closest('.hs-slide');
       if (!sl) return;
       var clave = sl.getAttribute('data-slide-plan') || '';
-      window.dataLayer.push({ event: 'click_banner', plan: clave, ubicacion: 'banner', landing_version: VERSION });
+      pushEvento({ event: 'click_banner', plan: clave, ubicacion: 'banner', landing_version: VERSION });
       if (clave) marcarPlan(clave);
       abrirModal(clave, 'banner');
     });
@@ -783,7 +792,7 @@
     // para medir cuántos empiezan el formulario y no lo terminan.
     form.addEventListener('input', function inicio() {
       form.removeEventListener('input', inicio);
-      window.dataLayer.push({ event: 'inicio_formulario', formulario: form.getAttribute('data-form') || '', landing_version: VERSION });
+      pushEvento({ event: 'inicio_formulario', formulario: form.getAttribute('data-form') || '', landing_version: VERSION });
     });
 
     // Solo dígitos en DNI y celular.
