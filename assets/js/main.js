@@ -779,6 +779,13 @@
       inp.value = k === 'landing_version' ? VERSION : k === 'landing_url' ? location.origin + location.pathname : (atrib[k] || '');
     });
 
+    // Primer dato que escribe el usuario: "inicio_formulario" (una vez por formulario y página)
+    // para medir cuántos empiezan el formulario y no lo terminan.
+    form.addEventListener('input', function inicio() {
+      form.removeEventListener('input', inicio);
+      window.dataLayer.push({ event: 'inicio_formulario', formulario: form.getAttribute('data-form') || '', landing_version: VERSION });
+    });
+
     // Solo dígitos en DNI y celular.
     $$('input[inputmode="numeric"]', form).forEach(function (inp) {
       inp.addEventListener('input', function () {
