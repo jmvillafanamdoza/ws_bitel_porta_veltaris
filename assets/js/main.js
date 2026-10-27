@@ -117,7 +117,7 @@
   /* ---------- Contacto (WhatsApp y llamada desde config) ---------- */
   var K = C.contacto || {};
   function waLink(msg) {
-    return 'https://wa.me/' + encodeURIComponent(K.whatsapp || '') + '?text=' + encodeURIComponent(msg || K.whatsappMensaje || '');
+    return 'https://wa.me/' + encodeURIComponent(K.whatsapp || '') + '?text=' + encodeURIComponent((K.whatsappPrefijo || '') + (msg || K.whatsappMensaje || ''));
   }
   var waHref = waLink();
   function prepararWA(a) {

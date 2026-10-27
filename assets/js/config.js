@@ -42,6 +42,7 @@ window.LANDING_CONFIG = {
     whatsapp: '51939730707',              // WHATSAPP: solo dígitos, con 51, sin "+"
     whatsappTexto: '939 730 707',         // WHATSAPP: texto visible
     whatsappMensaje: 'Hola, quiero portarme a Bitel con mi mismo número.',
+    whatsappPrefijo: '(AS1) ', // va delante de todo mensaje de WhatsApp para identificar que viene de esta web
     horarioAtencion: 'De 9 a.m. a 6 p.m.',  // texto informativo del horario de atención
     // El número del header solo se muestra en este horario (hora de Lima, 24 h).
     horarioLlamadas: { desde: 9, hasta: 18 }
