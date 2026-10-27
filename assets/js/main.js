@@ -830,7 +830,8 @@
 
       function exito() {
         var origen = form.getAttribute('data-form') || '';
-        if (session) session.setItem('lead_pendiente', JSON.stringify({ version: VERSION, plan: data.plan, formulario: origen, t: Date.now() }));
+        // El celular en formato E.164 viaja hasta gracias para las conversiones mejoradas de Ads (GTM lo cifra antes de enviarlo).
+        if (session) session.setItem('lead_pendiente', JSON.stringify({ version: VERSION, plan: data.plan, formulario: origen, tel: data.telefono ? '+51' + data.telefono : '', t: Date.now() }));
         track('envio_formulario', 'envioFormulario', { plan: data.plan, formulario: origen }, function () {
           location.href = (C.formulario && C.formulario.paginaGracias || 'gracias.html') + '?v=' + encodeURIComponent(VERSION);
         });
@@ -916,7 +917,7 @@
       var info = {};
       try { info = JSON.parse(pendiente); } catch (e) { info = {}; }
       session.removeItem('lead_pendiente'); // recargar la página no duplica la conversión
-      track('lead_confirmado', 'lead', { plan: info.plan || '', formulario: info.formulario || '', landing_version: info.version || '' });
+      track('lead_confirmado', 'lead', { plan: info.plan || '', formulario: info.formulario || '', landing_version: info.version || '', user_data: { phone_number: info.tel || '' } });
     }
   }
 })();
