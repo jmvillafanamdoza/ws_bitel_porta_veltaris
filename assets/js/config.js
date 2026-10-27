@@ -24,10 +24,18 @@ window.LANDING_CONFIG = {
   },
 
   /* ---------- Envío del formulario ----------
-     POST con JSON al endpoint (CRM, webhook, etc.). Con el placeholder,
-     el envío se simula y se redirige a gracias. */
+     POST con JSON al endpoint. Con el placeholder, el envío se simula y se
+     redirige a gracias (el lead NO se guarda en ningún lado).
+     Destino: CRM Veltaris, módulo WhatsApp (guarda en VELWA_WEB_LEADS y se ve
+     en WhatsApp > Leads web). Poner la URL solo cuando el módulo esté subido:
+       producción: 'https://veltarissystemcc.com/WHATSAPP/recibir_lead.php'
+       local:      'http://127.0.0.1:8000/WHATSAPP/recibir_lead.php'
+     El dominio de esta landing debe estar en VELWA_LEADS_ORIGENES del .env del CRM. */
   formulario: {
-    endpoint: '[https://tu-crm.com/api/leads]',
+    // TEMPORAL: CRM local de pruebas expuesto con ngrok (la PC y ngrok deben estar encendidos).
+    // Al subir el módulo a producción: 'https://veltarissystemcc.com/WHATSAPP/recibir_lead.php' y quitar cabeceras.
+    endpoint: 'https://unrepulsing-delmy-noncompoundable.ngrok-free.dev/WHATSAPP/recibir_lead.php',
+    cabeceras: { 'ngrok-skip-browser-warning': '1' }, // evita la página de aviso de ngrok gratis
     paginaGracias: 'gracias.html'
   },
 

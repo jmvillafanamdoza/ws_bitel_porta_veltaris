@@ -788,6 +788,14 @@
       inp.value = k === 'landing_version' ? VERSION : k === 'landing_url' ? location.origin + location.pathname : (atrib[k] || '');
     });
 
+    // Campo trampa: invisible para las personas, los bots lo llenan y el CRM descarta el envío.
+    if (!form.querySelector('input[name="sitio_web"]')) {
+      var trampa = doc.createElement('input');
+      trampa.type = 'text'; trampa.name = 'sitio_web'; trampa.tabIndex = -1;
+      trampa.autocomplete = 'off'; trampa.className = 'sr-only'; trampa.setAttribute('aria-hidden', 'true');
+      form.appendChild(trampa);
+    }
+
     // Primer dato que escribe el usuario: "inicio_formulario" (una vez por formulario y página)
     // para medir cuántos empiezan el formulario y no lo terminan.
     form.addEventListener('input', function inicio() {
@@ -837,6 +845,7 @@
       data.privacidad = !!(form.privacidad && form.privacidad.checked);
       data.publicidad = !!(form.publicidad && form.publicidad.checked);
       data.fecha = new Date().toISOString();
+      data.formulario = form.getAttribute('data-form') || '';
 
       // Overlay de carga a pantalla completa mientras se envía; se oculta si falla.
       // Es un <dialog> para quedar ENCIMA del modal de contacto (capa superior del navegador).
@@ -870,7 +879,7 @@
       var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 12000);
       fetch(endpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: Object.assign({ 'Content-Type': 'application/json' }, C.formulario.cabeceras || {}),
         body: JSON.stringify(data),
         signal: ctrl ? ctrl.signal : undefined
       }).then(function (r) {
