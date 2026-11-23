@@ -168,6 +168,17 @@
   pintarLlamada();
   setInterval(pintarLlamada, 60000);
 
+  /* WhatsApp: fuera de su horario (hora de Lima) no hay asesor que responda el chat,
+     así que se ocultan todos los botones y enlaces de WhatsApp (clase en <body>, ver bitel.css). */
+  function waAbierto() {
+    var H = K.horarioWhatsApp || { desde: 8, hasta: 20 };
+    var hora = horaLima();
+    return hora >= H.desde && hora < H.hasta;
+  }
+  function pintarWhatsApp() { body.classList.toggle('wa-cerrado', !waAbierto()); }
+  pintarWhatsApp();
+  setInterval(pintarWhatsApp, 60000);
+
   // Zona de la página donde está un elemento (para saber desde dónde se hizo clic).
   var ZONAS = [
     ['.site-header', 'header'], ['.promo-strip', 'barra-promo'], ['.offer', 'banner'], ['.hero-form', 'formulario-hero'],
@@ -869,7 +880,9 @@
         enviando = false;
         btn.removeAttribute('aria-busy'); btn.disabled = false; btn.innerHTML = textoBtn;
         if (status) {
-          status.innerHTML = 'No pudimos enviar tus datos. Inténtalo otra vez o escríbenos por <a data-wa data-ubicacion="error-form" href="' + esc(waHref) + '" target="_blank" rel="noopener">WhatsApp</a>.';
+          status.innerHTML = waAbierto()
+            ? 'No pudimos enviar tus datos. Inténtalo otra vez o escríbenos por <a data-wa data-ubicacion="error-form" href="' + esc(waHref) + '" target="_blank" rel="noopener">WhatsApp</a>.'
+            : 'No pudimos enviar tus datos. Inténtalo otra vez en unos minutos.';
         }
       }
 
