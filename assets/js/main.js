@@ -272,7 +272,9 @@
   // y precio a pagar, "Lo quiero" y WhatsApp juntos, y después beneficios y apps.
   function tarjetaPlan(p) {
     var destacado = /solicitado|vendido/i.test(p.etiqueta || '');
-    var etiqueta = destacado ? (p.bono || '') : (p.etiqueta || p.bono || '');
+    // "Mejor valor" va como banderita (en magenta), sin el borde del plan destacado.
+    var valor = /mejor valor/i.test(p.etiqueta || '');
+    var etiqueta = destacado || valor ? (p.bono || '') : (p.etiqueta || p.bono || '');
     var gbTxt = p.gb.replace(/[\[\]]/g, '');
     var gbPartes = gbTxt.match(/^([\d.,]+)\s*(.*)$/);
     var gb = gbPartes
@@ -300,6 +302,7 @@
     var msg = mensajeWA(p);
     return '<article class="pc' + (destacado ? ' is-featured' : '') + '">' +
       (destacado ? '<p class="pc-flag">' + esc(p.etiqueta) + '</p>' : '') +
+      (valor ? '<p class="pc-flag pc-flag--valor">' + esc(p.etiqueta) + '</p>' : '') +
       '<div class="pc-card">' +
         '<header class="pc-head">' +
           '<h3 class="pc-name">' + esc(p.nombre.replace(/ 5G$/, '')) + (p.cincoG ? ' <span class="tag-5g">5G</span>' : '') + '</h3>' +
