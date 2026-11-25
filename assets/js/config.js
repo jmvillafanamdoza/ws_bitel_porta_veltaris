@@ -52,7 +52,7 @@ window.LANDING_CONFIG = {
     // El número del header solo se muestra en este horario (hora de Lima, 24 h).
     horarioLlamadas: { desde: 9, hasta: 18 },
     // Los botones y enlaces de WhatsApp solo se muestran en este horario (hora de Lima, 24 h).
-    horarioWhatsApp: { desde: 8, hasta: 20 }
+    horarioWhatsApp: { desde: 9, hasta: 18 }
   },
 
   /* ---------- Precio "desde" (barra promo de escritorio) ---------- */
