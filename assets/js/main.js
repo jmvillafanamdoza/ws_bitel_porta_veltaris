@@ -282,7 +282,7 @@
   // gigas grandes, caja azul con el descuento en píldora amarilla, precio regular tachado
   // y precio a pagar, "Lo quiero" y WhatsApp juntos, y después beneficios y apps.
   function tarjetaPlan(p) {
-    var destacado = /solicitado|vendido/i.test(p.etiqueta || '');
+    var destacado = /solicitado|vendido|recomendado/i.test(p.etiqueta || '');
     // "Mejor valor" va como banderita (en magenta), sin el borde del plan destacado.
     var valor = /mejor valor/i.test(p.etiqueta || '');
     var etiqueta = destacado || valor ? (p.bono || '') : (p.etiqueta || p.bono || '');
